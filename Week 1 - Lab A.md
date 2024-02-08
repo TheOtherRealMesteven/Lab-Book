@@ -125,6 +125,10 @@ Also what happens if you dividing two integers?
 > If you divide two integers then the result value will be an integer regardless of if it has a decimal value attached. However, by making the return value a float or including a float in the process, it will keep the decimal value.
 
 </details>
+
+>[!IMPORTANT]
+> It is recommended to use consistent values throughout a statement. (Not using a decimal divided by an integer). Furthermore, `.0` identifies a decimal whilst `f` identifies a float.
+
 <details> <!-- Question 3 -->
   <summary> Q3. Types </summary>
 
@@ -399,6 +403,12 @@ The average calculated was accurate to the expected average so the code worked s
 ## Metadata:
 Mean average value calculator.
 </details>
+
+> [!WARNING]
+> Using `_` as a variable name flags the variable as not important to the compiler .: it is preferable to use an actual value.
+
+> [!IMPORTANT]
+> With `cin >> (double) value`; if the statement fails then you cannot use `cin` later as it flags due to an error. Therefore you must clear the `cin`.
 
 > [!NOTE]
 > There are a lot of similarities between C# and C++; this is due to C# being the newer version of C++ and thus using the same framework but with more user assistance.

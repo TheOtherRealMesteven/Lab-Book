@@ -12,6 +12,8 @@
 #### Question 3
 - 🤔 Variable Types
 #### Question 4
+- 🤔 Inaccuracies with large floating points
+- 🤔 Inaccuracies with zero error
 #### Question 5
 - 🤔 For loops in C++
 - 🤔 Similarity between C++ and C#

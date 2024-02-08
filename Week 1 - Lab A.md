@@ -7,12 +7,14 @@
 Locate the Solution Explorer within Visual Studio and select the Hello World project. Right click on this project and select Build. This should compile and link the project. Now run the Hello World program.
 Change between Debug and Release mode. Compile again and rerun the program.
 ## Solution:
+```c++
 #include <iostream>
 
 int main(int, char**) {
 	std::cout << "Hello World" << std::endl;
 	return 0;
 } 
+```
 ## Test data:
 n/a
 ## Sample output:
@@ -33,7 +35,9 @@ Create a new Empty C++ Console project called Temperature by using the project a
 NB: Be careful to select a C++, Empty Project
 Create a new cpp file within the temperature project by right clicking on the Temperature project in the Solution Explorer Window and select Add » Add New Item.
 Write a program to input a Fahrenheit measurement, convert it and output a Celsius value. The conversion formula is
+```c++
 celsius = 5/9 * (fahrenheit-32)
+```
 NB: You may want to select the Temperature project as the default project; to do this right click on the Temperature project and select Set as Startup Project.
 
 ## Solution:
@@ -57,7 +61,7 @@ Also what happens if you dividing two integers?
 
 ## Question:
 Using the “Hello World” program as a starting point, write a program that prints out the size in bytes of each of the fundamental data types in C++.
-Hint: Make use of the sizeof() operator, that returns the size of any data type.
+Hint: Make use of the `sizeof()` operator, that returns the size of any data type.
 Remember to include both the signed and unsigned versions of each data type.
 
 ## Solution:
@@ -82,23 +86,29 @@ n/a
 ## Question:
 In the lectures we discussed the precision of floating point numbers within C++, and how due to this precision the equality operator was unreliable.
 Write a simple program that includes the lines:
+```c++
 double x = 10.0;
 double y = 10.0;
 if (x == y)
       cout << “X and Y are identical” << endl;
+```
 Did the program execute as expected?
-Now try y = 20.0 / 2.0 and execute the program again.
+Now try `y = 20.0 / 2.0` and execute the program again.
 Then try a more complex calculation for y e.g.
+```c++
 const double x = 100000.123456789;
 const double a = 200000.123456789;
 double y = (x + a) / x;
 double z = 1.0 + (a / x);
 if (y == z) 
    cout << “y and z are identical” << endl;
+```
 Now try different values for x and a
 Printing out the values of x, y and z, may be useful in helping you form an opinion of what is happening.
 Once you’re confident you understand the logic, investigate:
+```c++
 double z = x / y;
+```
 How small does y have to be before you get a “divide by zero” error? Does the value of x affect the result?
 
 ## Solution:
@@ -123,6 +133,7 @@ n/a
 ## Question:
 In the lectures we have looked at constructs and iterators.
 Below is some C# code that calculates the factorial of a number (see https://www.mathsisfun.com/numbers/factorial.html for details of a factorial).
+```c++
 static void Main(string[] args)
 {
    int factorialNumber = 5;
@@ -135,6 +146,7 @@ static void Main(string[] args)
 
    System.Console.WriteLine(factorialTotal);
 }
+```
 Port the above C# code in to C++ using the provided Main.cpp file.
 [LAB BOOK - Add your C++ code to your lab book. Then reflect on what you have to change (or not change) from C# to C++ in terms of the iteration]
 
@@ -160,9 +172,11 @@ n/a
 ## Question:
 Using a while loop (or do-while loop), calculate the average value of values provided by the user from the console (cin). You should calculate the average after the user either enters a negative number or the user enters a non-number value (e.g. a letter).
 The following C++ code will get an int value from the user.
+```c++
 cout << "Please enter an int value, then press Enter" << endl;
 int n = 0;
 cin >> n;
+```
 [LAB BOOK - Add your C++ code to your lab book. Then reflect on what you have learnt]
 
 ## Solution:

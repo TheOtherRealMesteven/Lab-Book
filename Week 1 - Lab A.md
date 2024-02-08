@@ -10,7 +10,7 @@ Change between Debug and Release mode. Compile again and rerun the program.
 ```c++
 #include <iostream>
 
-int main(int, char**) {
+int main(int argc, char** argv) {
 	std::cout << "Hello World" << std::endl;
 	return 0;
 } 
@@ -26,39 +26,78 @@ Hello World
 ## Further information:
 What are purpose are the parameters in main?
 
-- `int` represents the number of arguments that are passed to the program when it is executed.
-- `char**` is a pointer for an array of character pointers. This can also be given as the array in question with `char* args[]`.
-The array of strings represents the individual argument inputs when the program is executed.
-
-Dont be confused with console inputs, this is different. These are given **before** the program runs.
+> - `int` parameter represents the number of arguments that are passed to the program when it is executed.
+> - `char**` parameter is a pointer for an array of character pointers. This can also be given as the array in question with `char* argv[]`.
+> The array of strings represents the individual argument inputs when the program is executed.
+>
+> Dont be confused with console inputs, this is different. These are given **before** the program runs.
 </details>
+
+> [!NOTE]
+> `std::cout` references a namespaces method. By including `using namespace std`; before the code, you can use the methods without writing the namespace.
+
+> [!IMPORTANT]
+> To change executing projects, set the desired project as the `default project`; do this by right clicking the project in Solution Explorer and selecting `Set as Startup Project`.
+
 <details> <!-- Question 2 -->
   <summary> Q2. Creating a new project </summary>
 
 ## Question:
-Create a new Empty C++ Console project called Temperature by using the project application wizard. This is done by right clicking on the 500083-Lab-A solution in the Solution Explorer Window and selecting Add » New Project.
-NB: Be careful to select a C++, Empty Project
+Create a new Empty C++ Console project called Temperature by using the project application wizard. 
+
+This is done by right clicking on the 500083-Lab-A solution in the Solution Explorer Window and selecting Add » New Project. *NB: Be careful to select a C++, Empty Project*
+
+
 Create a new cpp file within the temperature project by right clicking on the Temperature project in the Solution Explorer Window and select Add » Add New Item.
-Write a program to input a Fahrenheit measurement, convert it and output a Celsius value. The conversion formula is
+
+**Write a program to input a Fahrenheit measurement, convert it and output a Celsius value. The conversion formula is**
 ```c++
 celsius = 5/9 * (fahrenheit-32)
 ```
-NB: You may want to select the Temperature project as the default project; to do this right click on the Temperature project and select Set as Startup Project.
+NB: You may want to select the Temperature project as the default project; to do this right click on the Temperature project and select:
+
+`Set as Startup Project`.
 
 ## Solution:
 ```c++
- 
+int main(int argc, char** argv) 
+{
+	float fahrenheit;
+	cout << "Enter a Farenheit Temperature: ";
+	cin >> fahrenheit;
+	float celsius = 5.0 / 9 * (fahrenheit - 32);
+	cout << "In Celcius, the temperature is: " << celsius << std::endl;
+	return 0;
+}
 ```
 ## Test data:
-n/a
+|Identifier|Fahrenheit Temp|Celcius Temp|
+|--|--|--|
+boiling point of water	|212 F	|100 C
+body temperature	|98.6 F	|37 C
+cool room temperature	|68 F	|20 C
+freezing point of water	|32 F	|0 C
+
 ## Sample output:
-n/a
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a08a8498-2a55-4d87-8b69-769ab39b76c6)
+
+
 ## Reflection:
+|Input Value|Expected Value|Actual Value|Acceptable|
+|--|--|--|--|
+212|100|100|✔
+98.6|37|37|✔
+68|20|20|✔
+32|0|0|✔
+
+The program works as intended.
 
 ## Metadata:
+Fahrenheit temperature to Celcius temperature converter.
 
 ## Further information:
 Also what happens if you dividing two integers?
+> If you divide two integers then the result value will be an integer regardless of if it has a decimal value attached. However, by making the return value a float or including a float in the process, it will keep the decimal value.
 
 </details>
 <details> <!-- Question 3 -->

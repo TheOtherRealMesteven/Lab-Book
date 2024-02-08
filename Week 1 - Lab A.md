@@ -295,7 +295,8 @@ double z = x / y;
 ```
 How small does y have to be before you get a “divide by zero” error? Does the value of x affect the result?
 ### Solution
-### Output
+The value of x does not affect the result in this scenario as dividing by zero is based on the denominator rather than the numerator.
+The value of y needs to be near the value of zero to divide by zero. I am uncertain of the specific value required.
 
 </details>
 <details> <!-- Question 5 -->

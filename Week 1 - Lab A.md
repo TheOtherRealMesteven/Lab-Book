@@ -1,6 +1,8 @@
 # Week 1 - Lab A
 
 ## Lab Coverage
+*For future review, the coverage of each task has been listed below to act as an index to the taught material.*
+
 #### Question 1
 - 🤔 Console string output
 #### Question 2
@@ -17,6 +19,7 @@
 - 🤔 While loops in C++
 
 ## Lab Task Submission
+*The tasks assigned to be reviewed for the weeks lab has been completed below.*
 
 <details> <!-- Question 1 -->
   <summary> Q1. Hello World </summary>

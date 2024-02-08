@@ -226,8 +226,9 @@ n/a
   <summary> Q5. C#/C++ Iteration Comparison (for loop) </summary>
 
 ## Question:
-In the lectures we have looked at constructs and iterators.
-Below is some C# code that calculates the factorial of a number (see https://www.mathsisfun.com/numbers/factorial.html for details of a factorial).
+In the lectures we have looked at constructs and iterators. Below is some C# code that calculates the factorial of a number 
+
+(see https://www.mathsisfun.com/numbers/factorial.html for details of a factorial).
 ```c++
 static void Main(string[] args)
 {
@@ -243,20 +244,29 @@ static void Main(string[] args)
 }
 ```
 Port the above C# code in to C++ using the provided Main.cpp file.
+
 [LAB BOOK - Add your C++ code to your lab book. Then reflect on what you have to change (or not change) from C# to C++ in terms of the iteration]
 
 ## Solution:
 ```c++
- 
+int main(int argn, char* argv[])
+{
+    int factorialNumber = 5;
+    int factorialTotal = 1;
+    for (int n = 2; n <= factorialNumber; n++) {
+        factorialTotal *= n;
+    }
+    cout << factorialTotal << endl;
+}
 ```
 ## Test data:
 n/a
 ## Sample output:
-n/a
+120
 ## Reflection:
-
+The code used in the factorial calculator is identical to the C# code, aside from the console output code.
 ## Metadata:
-
+Factorial Calculator.
 ## Further information:
 
 

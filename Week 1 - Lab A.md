@@ -8,6 +8,7 @@
 - 🤔 Assigning variables
 - 🤔 Console string input
 #### Question 3
+- 🤔 Variable Types
 #### Question 4
 #### Question 5
 #### Question 6
@@ -124,18 +125,48 @@ Remember to include both the signed and unsigned versions of each data type.
 
 ## Solution:
 ```c++
- 
+#include <iostream>
+using namespace std;
+
+int main (int argc, char **argv) {
+	
+	cout << "Integer Values" << endl;
+	cout << "Integer: " << sizeof(int) << "\tUnsigned ver : " << sizeof(unsigned int) << endl;
+	cout << "Short: " << sizeof(short) << "\tUnsigned ver: " << sizeof(unsigned short) << endl;
+	cout << "Long: " << sizeof(long) << "\tUnsigned ver: " << sizeof(unsigned long) << endl;
+	cout << "Long Long: " << sizeof(long long) << "\tUnsigned ver: " << sizeof(unsigned long long) << endl;
+	cout << endl; cout << endl;
+
+	cout << "Float Values" << endl;
+	cout << "Float: " << sizeof(float) << endl;
+	cout << "Double: " << sizeof(double) << endl;
+	cout << "Long Double: " << sizeof(long double) << endl;
+	cout << endl; cout << endl;
+
+	cout << "Char Values" << endl;
+	cout << "Char: " << sizeof(char) << endl;
+	cout << "Signed Char: " << sizeof(signed char) << "\tUnsigned Char: " << sizeof(unsigned char) << endl;
+	cout << "wchar_t: " << sizeof(wchar_t) << endl;
+	cout << "Char16_t: " << sizeof(char16_t) << "\tChar32_t: " << sizeof(char32_t) << endl;
+	cout << endl; cout << endl;
+
+	cout << "Other Values" << endl;
+	cout << "Bool: " << sizeof(bool) << endl;
+
+	return 0;
+}
 ```
 ## Test data:
 n/a
 ## Sample output:
-n/a
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/41467ac2-633a-49eb-a702-250060d415df)
+
 ## Reflection:
-
+Unsigned variants of values have the same length as their signed counterparts. Which makes sense due to the premise of signed values not increasing the range of values.
 ## Metadata:
-
+Character type sizing display.
 ## Further information:
-
+Char_t is used to represent extended character sets such as unicode characters as they need more than a single byte.
 
 </details>
 <details> <!-- Question 4 -->

@@ -1,5 +1,19 @@
 # Week 1 - Lab A
 
+## Lab Coverage
+#### Question 1
+- 🤔 Console string output
+#### Question 2
+- 🤔 Creating a new project
+- 🤔 Assigning variables
+- 🤔 Console string input
+#### Question 3
+#### Question 4
+#### Question 5
+#### Question 6
+
+## Lab Task Submission
+
 <details> <!-- Question 1 -->
   <summary> Q1. Hello World </summary>
 

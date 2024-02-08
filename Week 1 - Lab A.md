@@ -11,7 +11,10 @@
 - 🤔 Variable Types
 #### Question 4
 #### Question 5
+- 🤔 For loops in C++
+- 🤔 Similarity between C++ and C#
 #### Question 6
+- 🤔 While loops in C++
 
 ## Lab Task Submission
 
@@ -107,6 +110,8 @@ freezing point of water	|32 F	|0 C
 
 The program works as intended.
 
+> I have learnt how to write C++ console inputs and outputs.
+
 ## Metadata:
 Fahrenheit temperature to Celcius temperature converter.
 
@@ -162,7 +167,7 @@ n/a
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/41467ac2-633a-49eb-a702-250060d415df)
 
 ## Reflection:
-Unsigned variants of values have the same length as their signed counterparts. Which makes sense due to the premise of signed values not increasing the range of values.
+> Unsigned variants of values have the same length as their signed counterparts. Which makes sense due to the premise of signed values not increasing the range of values.
 ## Metadata:
 Character type sizing display.
 ## Further information:
@@ -265,19 +270,22 @@ n/a
 120
 ## Reflection:
 The code used in the factorial calculator is identical to the C# code, aside from the console output code and the method structure.
-> Rather than having an array input for the methods arguments, it has the size and array input. This is likely due to there being less compiler safe guards to prevent errors.
-> And the console output method differs from C# as the values must be inserted akin to commands rather than passed through as just a value.
+- Rather than having an array input for the methods arguments, it has the size and array input. This is likely due to there being less compiler safe guards to prevent errors.
+- And the console output method differs from C# as the values must be inserted akin to commands rather than passed through as just a value.
+
+> I have learnt how to write for loops and how similar they are to C#.
 ## Metadata:
 Factorial Calculator.
-## Further information:
-
 
 </details>
 <details> <!-- Question 6 -->
   <summary> Q6. Calculate Average using Iteration (while loop) </summary>
 
 ## Question:
-Using a while loop (or do-while loop), calculate the average value of values provided by the user from the console (cin). You should calculate the average after the user either enters a negative number or the user enters a non-number value (e.g. a letter).
+Using a while loop (or do-while loop), calculate the average value of values provided by the user from the console (cin). 
+
+You should calculate the average after the user either enters a negative number or the user enters a non-number value (e.g. a letter).
+
 The following C++ code will get an int value from the user.
 ```c++
 cout << "Please enter an int value, then press Enter" << endl;
@@ -288,17 +296,37 @@ cin >> n;
 
 ## Solution:
 ```c++
- 
+ int main(int argn, char* argv[])
+{
+    int count = 0;
+    double sum = 0.0;
+    double _;
+    
+    cout << "Enter values to calculate their average. Enter a negative/nun-numerical value to finish inputting:" << endl;
+    while (cin >> _ && _ > 0) {
+        sum += _;
+        count++;
+    }
+    if (count == 0) cout << "No values entered.";
+    else cout << "Average: " << sum / count << endl;
+}
 ```
 ## Test data:
-n/a
+5 8 12 3 -1
+
+Expected Average: 7
 ## Sample output:
-n/a
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/b588485b-cfeb-4c93-9854-61333d4a784a)
+
 ## Reflection:
+The average calculated was accurate to the expected average so the code worked successfully.
+
+> I have learnt how to check if a value is an integer with C++.
+> I have learnt how to write while loops and how similar they are to C#.
 
 ## Metadata:
-
-## Further information:
-
-
+Mean average value calculator.
 </details>
+
+> [!NOTE]
+> There are a lot of similarities between C# and C++; this is due to C# being the newer version of C++ and thus using the same framework but with more user assistance.

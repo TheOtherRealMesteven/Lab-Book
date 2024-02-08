@@ -20,12 +20,17 @@ n/a
 ## Sample output:
 n/a
 ## Reflection:
-This is programming 101
+This is the base getting started script used in programming lessons.
 ## Metadata:
 Hello World
 ## Further information:
 What are purpose are the parameters in main?
 
+- `int` represents the number of arguments that are passed to the program when it is executed.
+- `char**` is a pointer for an array of character pointers. This can also be given as the array in question with `char* args[]`.
+The array of strings represents the individual argument inputs when the program is executed.
+
+Dont be confused with console inputs, this is different. These are given **before** the program runs.
 </details>
 <details> <!-- Question 2 -->
   <summary> Q2. Creating a new project </summary>

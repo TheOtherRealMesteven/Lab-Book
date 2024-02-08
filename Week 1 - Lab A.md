@@ -180,9 +180,9 @@ Char_t is used to represent extended character sets such as unicode characters a
 <details> <!-- Question 4 -->
   <summary> Q4. Floating point precision </summary>
 
-## Question:
+## Task A:
 In the lectures we discussed the precision of floating point numbers within C++, and how due to this precision the equality operator was unreliable.
-### A)
+### Question
 Write a simple program that includes the lines:
 ```c++
 double x = 10.0;
@@ -190,10 +190,45 @@ double y = 10.0;
 if (x == y)
       cout << “X and Y are identical” << endl;
 ```
+### Solution
+```c++
+int main(int argn, char* argv[])
+{
+    double x = 10.0;
+    double y = 10.0;
+    if (x == y)
+        cout << "X and Y are identical" << endl;
+}
+```
+### Output
 Did the program execute as expected?
-### B)
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/84489c45-b896-47fd-bce1-fa166b3c17f4)
+
+The program executed as expected.
+
+
+## Task B:
+### Question
 Now try `y = 20.0 / 2.0` and execute the program again.
-### C)
+### Solution
+```c++
+int main(int argn, char* argv[])
+{
+    double x = 10.0;
+    double y = 20.0 / 2.0;
+    if (x == y)
+        cout << "X and Y are identical" << endl;
+}
+```
+### Output
+Did the program execute as expected?
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/84489c45-b896-47fd-bce1-fa166b3c17f4)
+
+The program executed as expected.
+## Task C:
+### Question
 Then try a more complex calculation for y e.g.
 ```c++
 const double x = 100000.123456789;
@@ -203,31 +238,62 @@ double z = 1.0 + (a / x);
 if (y == z) 
    cout << “y and z are identical” << endl;
 ```
-### D)
+### Solution
+```c++
+int main(int argn, char* argv[])
+{
+    const double x = 100000.123456789;
+    const double a = 200000.123456789;
+    double y = (x + a) / x;
+    double z = 1.0 + (a / x);
+    if (y == z)
+        cout << "y and z are identical" << endl;
+}
+```
+### Output
+y = 3
+
+z = 3
+
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/91f6df06-a495-41c1-8ef5-bb551334c2e7)
+
+The program did not perform as expected.
+## Task D:
+### Question
 Now try different values for x and a
 
 Printing out the values of x, y and z, may be useful in helping you form an opinion of what is happening.
-### E)
+### Solution
+```c++
+int main(int argn, char* argv[])
+{
+    const double x = 101600.545458874;
+    const double a = 201600.545458874;
+    double y = (x + a) / x;
+    double z = 1.0 + (a / x);
+    if (y == z)
+        cout << "y and z are identical" << endl;
+}
+```
+### Output
+y = 2.98425
+
+z = 2.98425
+
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/76851903-e1ce-4c37-a659-0ba18c7d06ed)
+
+The program did perform as expected.
+## Task E:
+### Question
 Once you’re confident you understand the logic, investigate:
 ```c++
 double z = x / y;
 ```
 How small does y have to be before you get a “divide by zero” error? Does the value of x affect the result?
-
-## Solution:
-```c++
- 
-```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
-
-## Metadata:
-
-## Further information:
-
+### Solution
+### Output
 
 </details>
 <details> <!-- Question 5 -->

@@ -174,6 +174,7 @@ Char_t is used to represent extended character sets such as unicode characters a
 
 ## Question:
 In the lectures we discussed the precision of floating point numbers within C++, and how due to this precision the equality operator was unreliable.
+### A)
 Write a simple program that includes the lines:
 ```c++
 double x = 10.0;
@@ -182,7 +183,9 @@ if (x == y)
       cout << “X and Y are identical” << endl;
 ```
 Did the program execute as expected?
+### B)
 Now try `y = 20.0 / 2.0` and execute the program again.
+### C)
 Then try a more complex calculation for y e.g.
 ```c++
 const double x = 100000.123456789;
@@ -192,8 +195,11 @@ double z = 1.0 + (a / x);
 if (y == z) 
    cout << “y and z are identical” << endl;
 ```
+### D)
 Now try different values for x and a
+
 Printing out the values of x, y and z, may be useful in helping you form an opinion of what is happening.
+### E)
 Once you’re confident you understand the logic, investigate:
 ```c++
 double z = x / y;

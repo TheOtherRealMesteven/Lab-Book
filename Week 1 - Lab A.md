@@ -264,7 +264,9 @@ n/a
 ## Sample output:
 120
 ## Reflection:
-The code used in the factorial calculator is identical to the C# code, aside from the console output code.
+The code used in the factorial calculator is identical to the C# code, aside from the console output code and the method structure.
+> Rather than having an array input for the methods arguments, it has the size and array input. This is likely due to there being less compiler safe guards to prevent errors.
+> And the console output method differs from C# as the values must be inserted akin to commands rather than passed through as just a value.
 ## Metadata:
 Factorial Calculator.
 ## Further information:

@@ -290,6 +290,8 @@ bool Copy(char filenamein[], char filenameout[])
 }
 ```
 
+With the ``ios::binary`` method of opening and writing to files, the data is copied bit by bit and so can be used across file types as far as I am aware.
+
 <details>
   <summary> Different File Type</summary>
 

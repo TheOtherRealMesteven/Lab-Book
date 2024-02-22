@@ -9,9 +9,10 @@
 - 🤔 File reading
 - 🤔 File writing
 #### Question 3
-#### Question 4
-#### Question 5
-#### Question 6
+- 🤔 Debugging movement shortcuts
+- 🤔 How to access codes assembly
+- 🤔 How to access codes memory and registers
+- 🤔 A small amount on the breakdown of assembly
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
@@ -315,17 +316,102 @@ File: `output.webp`
 > For file copying you need the following namespaces `std` and libraries `iostream` and `fstream`.
 
 <details> <!-- Question 3 -->
-  <summary> Q3. </summary>
+  <summary> Q3. Assembly, Registers and Memory  </summary>
 
-## Question:
+## Lesson:
+<details>
+	<summary> View: Code breakdown, Memory, Registers etc . . .</summary>
 
-## Solution:
-```c++
-```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+### Code in Assembly
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/f04ed1b6-8ad3-40f4-abaf-85d84877f914)
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/43ff1083-4daa-4246-b992-cf1e6283b4fb)
+
+### Memory
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/099e3772-4db0-49e1-a675-4b30f7fcfbbe)
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a9d2c3d9-b290-43bb-9277-e3acebce45b4)
+
+### Registers
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/987d770d-4e73-43e9-80f9-dff090cefc0e)
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/ffb9bf53-0964-4c27-889e-c32b9e5d370c)
 
 </details>
+
+## Question:
+```
+0x0018FE15  cc cc cc cc cc cc cc cc cc cc cc cc cc  ÌÌÌÌÌÌÌÌÌÌÌÌÌ
+0x0018FE22  cc cc cc cc cc cc cc cc cc cc cc cc cc  ÌÌÌÌÌÌÌÌÌÌÌÌÌ
+0x0018FE2F  cc 0a 00 00 00 14 00 00 00 00 00 00 00  Ì............
+0x0018FE3C  00 00 00 00 00 e0 fd 7e cc cc cc cc cc  .....àý~ÌÌÌÌÌ
+0x0018FE49  cc cc cc cc cc cc cc cc cc cc cc cc cc  ÌÌÌÌÌÌÌÌÌÌÌÌÌ
+0x0018FE56  cc cc cc cc cc cc cc cc cc cc cc cc cc  ÌÌÌÌÌÌÌÌÌÌÌÌÌ
+```
+
+###  Data sizes
+
+**In source.cpp we use variables a and b. How many bytes do each of these variables occupy in memory? Look at the memory dump above; can you verify your answer?**
+
+In the code above, we can see variable `a`'s value of `0a` and variable `b`'s value of `14`. These integers are hexadecimal values and so they can hold a maximum of 32 bits aka 4 bytes. Meaning they hold 4 bytes each of memory.
+
+*Each of the registers we have used so far in this program have been 32-bits in size e.g. EAX. Look at the register window. The values in each register are represented by 8 digits; 2 digits for each byte.*
+### Parameter types
+**Now modify the code and add in your own function that takes 3 parameters each of a different type.**
+
+**From what you have learnt in the previous exercises, use the Debugger and Disassembly to investigate how the C++ parameter passing mechanism deals with these new parameters.**
+## Test data:
+```c++
+int a [4] = {10, 20, 30, 40};
+const char* b = "Cheese";
+float c = 3.01f;
+```
+## Analysis:
+### Disassembly
+```
+	int a [4] = {10, 20, 30, 40};
+00007FF64BC166CC  mov         dword ptr [a],0Ah  					// mov (move) // dword ptr (32-bit value) // into the memory location [`a`] // `0A`h (denary:10)
+00007FF64BC166D3  mov         dword ptr [rbp+0Ch],14h  					// mov (move) // dword ptr (32-bit value) // into the memory location [`0C`h (denary:12) from the base pointer] // `14`h (denary:20)
+00007FF64BC166DA  mov         dword ptr [rbp+10h],1Eh  					// mov (move) // dword ptr (32-bit value) // into the memory location [`10`h (denary:16) from the base pointer] // `1E`h (denary:30)
+00007FF64BC166E1  mov         dword ptr [rbp+14h],28h  					// mov (move) // dword ptr (32-bit value) // into the memory location [`14`h (denary:20) from the base pointer] // `28`h (denary:40)
+	const char* b = "Cheese";
+00007FF64BC166E8  lea         rax,[string "Cheese" (07FF64BC1AC24h)] 			// lea (load) // rax (Register AX) // [string "Cheese" // located at memory address (07FF64BC1AC24h)]
+00007FF64BC166EF  mov         qword ptr [b],rax  					// mov (move) // qword ptr (64-bit value) // into the memory location [`b`] // the value held in rax (Memory address 07FF64BC1AC24h)
+	float c = 3.01f;
+00007FF64BC166F3  movss       xmm0,dword ptr [__real@4040a3d7 (07FF64BC1AC2Ch)]  	// movss (move float?) // into xmmo (Register xmm0) // dword ptr (32-bit value) // [value __real@4040a3d7 // located at memory address (07FF64BC1AC2Ch)]
+00007FF64BC166FB  movss       dword ptr [c],xmm0					// movss (move float?) // dword ptr (32-bit value) // into the memory location [`c`] // the value held at xmm0 (The thing above)
+```
+
+### Registers
+#### Registers (Before assigning parameters)
+```
+RAX = 0000000000000001 RBX = 0000000000000000 RCX = 00007FF64BC23066 RDX = 00000279E637B0D0 RSI = 0000000000000000 RDI = 000000C9AD76F818 R8  = 00000279E637FAE0 R9  = 000000C9AD76F7E8 R10 = 0000000000000012 R11 = 000000C9AD76F890 R12 = 0000000000000000 R13 = 0000000000000000 R14 = 0000000000000000 R15 = 0000000000000000 RIP = 00007FF64BC166CC RSP = 000000C9AD76F760 RBP = 000000C9AD76F780 EFL = 00000200 
+
+0x000000C9AD76F788 = CCCCCCCC 
+```
+#### Registers (After assigning parameters)
+```
+RAX = 00007FF64BC1AC24 RBX = 0000000000000000 RCX = 00007FF64BC23066 RDX = 00000279E637B0D0 RSI = 0000000000000000 RDI = 000000C9AD76F818 R8  = 00000279E637FAE0 R9  = 000000C9AD76F7E8 R10 = 0000000000000012 R11 = 000000C9AD76F890 R12 = 0000000000000000 R13 = 0000000000000000 R14 = 0000000000000000 R15 = 0000000000000000 RIP = 00007FF64BC16700 RSP = 000000C9AD76F760 RBP = 000000C9AD76F780 EFL = 00000202 
+
+0x000000C9AD76F7D4 = 4040A3D7 
+```
+#### Changes
+- RAX - Now contains the memory address of the string "Cheese" so that it can be constant.
+- RIP - Memory location of the instruction to be executed next (instruction pointer).
+- EFL
+- 0x000000C9AD76F7D4
+
+## Reflection:
+ - What is movss?
+ - Why is the floats value nothing like 3.01f? Is it a temporary value?
+ - Is xmm0 a memory location? Or is it an unlisted register?
+ - What is EFL?
+ - What is 0x000000C9AD76F7D4 used for?
+ - Where can I find the stack to follow the trace?
+</details>
+
+> [!NOTE]
+> Debugging tools:
+> `F11` - Execute the current line (If it branches anywhere, follow)
+> `F10` - Execute the current line (Then move onto the next in the breakdown)
+> `F5` - Continue the code until the next breakpoint / the end

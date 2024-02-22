@@ -242,6 +242,7 @@ File: `input.webp`
 
 ### Sample output:
 File: `output.webp`
+
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/c667c824-b293-4863-8694-853130fca1b1)
 
 **Conclusion: ❎ Unsuccessfully Copied**

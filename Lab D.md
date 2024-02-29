@@ -452,4 +452,4 @@ void functionD() {
 > `*p` means that variable `p` is a pointer to a memory location. And `&x` gets the memory location of the variable `x`.
 
 > [!IMPORTANT]
-> `void* p` is a void pointer which can point to any memory location, similar to object in C#.
+> `void* p` is a void pointer which can point to any memory location, similar to object in C#. This is useful for looped pointers because the pointer stars matter! `*p` = `&q` works if q is not a pointer. `void *p = &q` works regardless.

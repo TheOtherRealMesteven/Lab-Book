@@ -9,6 +9,7 @@
 - 🤔 Ignoring file whitespace (Spaces and EOL's)
 - 🤔 Reading integer arrays from a file.
 #### Question 3
+- 🤔 Further file saving (from Lab C) practices.
 #### Question 4
 #### Question 5
 #### Question 6
@@ -118,11 +119,11 @@ Close input file stream
 ```c++
 const int SIZE = 9;
 const bool DEBUG = false;
+int grid[SIZE][SIZE];
 
 void Grid::LoadGrid(const char filename[])
 {
     ifstream fin(filename, ios::in);
-    int grid[SIZE][SIZE];
     if (!fin) {
         cerr << "Error: Unable to open the input file.\n";
         return;
@@ -148,6 +149,10 @@ void Grid::LoadGrid(const char filename[])
     }
 }
 ```
+- Using the previous lab as reference, I implemented the file reading system. `ios::in` was selected as we would be handing text file inputs.
+- I added a presence check to ensure that the file was there to be loaded and didnt cause a program crash.
+- I iterated through the expected size of the 2d array, skipping the whitespace characters and inserting the value into the grid. If the grid was saved incorrectly then an error would be output.
+
 ## Test data:
 **Input Name:** `Grid1.txt`
 
@@ -169,18 +174,66 @@ void Grid::LoadGrid(const char filename[])
 
 </details>
 <details> <!-- Question 3 -->
-  <summary> Q3. </summary>
+  <summary> Q3. Saving the Grid </summary>
 
 ## Question:
-
+Implement the SaveGrid(const char filename[]) method. This method will save the values of m_grid in a similar format to that of the Grid1.txt file. Please use another name for the output file so that your Grid1.txt file is not overwritten.
 ## Solution:
 ```c++
+void Grid::SaveGrid(const char filename[])
+{
+    ofstream fout(filename, ios::out);
+    if (!fout)
+    {
+        cerr << "Error: Unable to open the output file.\n";
+        return;
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            fout << grid[i][j] << " ";
+        }
+        fout << endl;
+    }
+    fout.close();
+    cout << "Grid saved to: " << filename << endl;
+}
 ```
+- Using the previous lab as reference, I implemented the file saving system. `ios::out` was selected as we would be handing text file inputs.
+- I added a presence check to ensure that the file was there to be loaded and didnt cause a program crash.
+- I iterated through the expected size of the 2d array, storing the values followed by a space into the file and creating a new line for when the current grid row was finished.
+- **There is a slight discrepancy with the saved file where the new file has a trailing white space on the lines, however the load program handles this.**
+
 ## Test data:
-n/a
+**Input Name:** `Grid1.txt`
+
+**Contents:**
+```
+1 2 3 4 5 6 7 8 9
+2 3 4 5 6 7 8 9 1
+3 4 5 6 7 8 9 1 2
+4 5 6 7 8 9 1 2 3
+5 6 7 8 9 1 2 3 4
+6 7 8 9 1 2 3 4 5
+7 8 9 1 2 3 4 5 6
+8 9 1 2 3 4 5 6 7
+9 1 2 3 4 5 6 7 8
+```
 ## Sample output:
-n/a
-## Reflection:
+**Input Name:** `GridOut.txt`
+
+**Contents:**
+```
+1 2 3 4 5 6 7 8 9 
+2 3 4 5 6 7 8 9 1 
+3 4 5 6 7 8 9 1 2 
+4 5 6 7 8 9 1 2 3 
+5 6 7 8 9 1 2 3 4 
+6 7 8 9 1 2 3 4 5 
+7 8 9 1 2 3 4 5 6 
+8 9 1 2 3 4 5 6 7 
+9 1 2 3 4 5 6 7 8 
+```
+**There is a slight discrepancy with the saved file where the new file has a trailing white space on the lines, however the load program handles this.**
 
 </details>
 <details> <!-- Question 4 -->

@@ -6,6 +6,8 @@
 #### Question 1
 - 🤔 Definitions and purpose of header and source files. 
 #### Question 2
+- 🤔 Ignoring file whitespace (Spaces and EOL's)
+- 🤔 Reading integer arrays from a file.
 #### Question 3
 #### Question 4
 #### Question 5
@@ -95,18 +97,75 @@ private:
 > Constructors and Deconstructors dont have to be included in the header file, they can purely be defined in the source files.
 
 <details> <!-- Question 2 -->
-  <summary> Q2. </summary>
+  <summary> Q2. Reading into Grid Class </summary>
 
 ## Question:
+Implement the `Grid::LoadGrid(const char filename[])` method in `Grid.cpp`. This method should follow the following pseudo code.
+
+```
+Create an input file stream from filename
+for each y value from 0 to 8 inclusive
+{
+   for each x value from 0 to 8 inclusive
+   {
+      store next value from the input file stream into grid at x,y
+   }
+}
+Close input file stream
+```
 
 ## Solution:
 ```c++
+const int SIZE = 9;
+const bool DEBUG = false;
+
+void Grid::LoadGrid(const char filename[])
+{
+    ifstream fin(filename, ios::in);
+    int grid[SIZE][SIZE];
+    if (!fin) {
+        cerr << "Error: Unable to open the input file.\n";
+        return;
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            fin >> ws; // Skip whitespace characters, including spaces
+            if (!(fin >> grid[i][j])) {
+                cerr << "Error: Failed to read integer from file.\n";
+                return;
+            }
+        }
+    }
+    fin.close();
+    if (!DEBUG) return; // Debug output the grid
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            cout << grid[i][j];
+        }
+        cout << endl;
+    }
+}
 ```
 ## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+**Input Name:** `Grid1.txt`
+
+**Contents:**
+```
+1 2 3 4 5 6 7 8 9
+2 3 4 5 6 7 8 9 1
+3 4 5 6 7 8 9 1 2
+4 5 6 7 8 9 1 2 3
+5 6 7 8 9 1 2 3 4
+6 7 8 9 1 2 3 4 5
+7 8 9 1 2 3 4 5 6
+8 9 1 2 3 4 5 6 7
+9 1 2 3 4 5 6 7 8
+```
+
+## Output:
+![README-debug1](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/2e4c0015-6443-4e1b-b91e-d073c184cb56)
 
 </details>
 <details> <!-- Question 3 -->

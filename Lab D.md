@@ -91,6 +91,7 @@ private:
 
 ## Reflection:
 - Whats the difference between `.h` files and `.hpp` files?
+*`.hpp` is header file for c++ programs. But both works*
 </details>
 
 > [!NOTE]
@@ -99,8 +100,8 @@ private:
 > [!IMPORTANT]
 > `LNK2019` Errors are caused by the compiler not being able to link files together. This can be caused by missing method declarations in header files or the source files.
 
-> [!NOTE]
-> Constructors and Deconstructors dont have to be included in the header file, they can purely be defined in the source files.
+> [!IMPORTANT]
+> Dont necessarily need constructor and deconstructor in header file if its not defined.
 
 <details> <!-- Question 2 -->
   <summary> Q2. Reading into Grid Class </summary>
@@ -178,6 +179,13 @@ void Grid::LoadGrid(const char filename[])
 ![README-debug1](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/2e4c0015-6443-4e1b-b91e-d073c184cb56)
 
 </details>
+
+> [!IMPORTANT]
+> Avoid full capitalised variable names as they are used for Macros. (Research into this as it'll come up later)
+
+> [!IMPORTANT]
+> `_DEBUG` is a boolean flagged by visual studio being in debug mode. 😊
+
 <details> <!-- Question 3 -->
   <summary> Q3. Saving the Grid </summary>
 
@@ -361,6 +369,10 @@ If you want to do this sort of pointer arithmetic then you need to guarantee the
 For now, just be careful using pointer arithmetic. This time we were lucky and the C++ run time checking detected the error for us. You cannot rely on the run time finding more complex errors.
 
 </details>
+
+> [!IMPORTANT]
+> The above would have worked in release mode, it failed in debug mode because debug mode has a lot of space filled with `C`'s which catches pointers pointing to invalid locations. However, the code points 4 bytes above the memory location which would be the correct location in release mode.
+
 <details> <!-- Question 6 -->
   <summary> Q6. Pointers - The crash </summary>
 
@@ -420,3 +432,6 @@ void functionD() {
 
 > [!IMPORTANT]
 > `*p` means that variable `p` is a pointer to a memory location. And `&x` gets the memory location of the variable `x`.
+
+> [!IMPORTANT]
+> `void* p` is a void pointer which can point to any memory location, similar to object in C#.

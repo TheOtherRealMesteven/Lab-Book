@@ -2,22 +2,16 @@
 
 ## Lab Coverage
 *For future review, the coverage of each task has been listed below to act as an index to the taught material.*
-
-#### Question 1
-- 🤔 Definitions and purpose of header and source files. 
-#### Question 2
-- 🤔 Ignoring file whitespace (Spaces and EOL's)
-- 🤔 Reading integer arrays from a file.
-#### Question 3
-- 🤔 Further file saving (from Lab C) practices.
-#### Question 4
-- 🤔 Recap on pointer variable and memory locations (`*p` and `&a`)
-#### Question 5
-- 🤔 Recap on variable memory locations being different to code.
-#### Question 6
-- 🤔 Recap on memory locations being able to be directed outside the codes alloted space.
-#### Question 7
-- 🤔 Fun with pointers pointing to pointers pointing to memory locations.
+|Question|Learned Stuff|
+|--|--|
+|**1**| 🤔 Definitions and purpose of header and source files. 
+|**2**| 🤔 Ignoring file whitespace (Spaces and EOL's)
+| | 🤔 Reading integer arrays from a file.
+|**3**| 🤔 Further file saving (from Lab C) practices.
+|**4**| 🤔 Recap on pointer variable and memory locations (`*p` and `&a`)
+|**5**| 🤔 Recap on variable memory locations being different to code.
+|**6**| 🤔 Recap on memory locations being able to be directed outside the codes alloted space.
+|**7**| 🤔 Fun with pointers pointing to pointers pointing to memory locations.
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*

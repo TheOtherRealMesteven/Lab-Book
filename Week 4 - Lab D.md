@@ -15,7 +15,9 @@
 #### Question 5
 - 🤔 Recap on variable memory locations being different to code.
 #### Question 6
+- 🤔 Recap on memory locations being able to be directed outside the codes alloted space.
 #### Question 7
+
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
@@ -360,19 +362,26 @@ For now, just be careful using pointer arithmetic. This time we were lucky and t
 
 </details>
 <details> <!-- Question 6 -->
-  <summary> Q6. </summary>
+  <summary> Q6. Pointers - The crash </summary>
 
 ## Question:
+Comment out the call to `functionB` and uncomment the call to `functionC`.
 
-## Solution:
+Compile and run the program.
+
+The program crashes, why?
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/7957b956-c2f0-4924-9db8-2833d093e5c8)
+
+*The code `*p = 999` assigns the memory location `999` to pointer variable p. And that is outside the scope of the codes permitted space and so causes an error to appear. If the code were ran without these limitations, there could be some serious damage caused by changing values used by other programs.*
+
+Set a breakpoint at line
 ```c++
+unsigned int a = 0x00ff00ff;
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+Single-step through the code and determine the reason for the crash.
 
+The Windows operating system attempts to prevent applications from damaging other applications. This error message is from Windows telling you that your code has attempted to access a memory location outside of its permitted memory footprint.
 </details>
 <details> <!-- Question 7 -->
   <summary> Q7. </summary>

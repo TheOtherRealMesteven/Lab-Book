@@ -11,6 +11,7 @@
 #### Question 3
 - 🤔 Further file saving (from Lab C) practices.
 #### Question 4
+- 🤔 Recap on pointer variable and memory locations (`*p` and `&a`)
 #### Question 5
 #### Question 6
 

@@ -13,7 +13,9 @@
 #### Question 4
 - 🤔 Recap on pointer variable and memory locations (`*p` and `&a`)
 #### Question 5
+- 🤔 Recap on variable memory locations being different to code.
 #### Question 6
+#### Question 7
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
@@ -303,18 +305,58 @@ From reviewing the changing of the values, it can be confirmed that `p` is being
 
 </details>
 <details> <!-- Question 5 -->
-  <summary> Q5. </summary>
+  <summary> Q5. Pointers - False assumptions </summary>
 
 ## Question:
-
-## Solution:
+Comment out the call to functionA and uncomment the call to functionB.
 ```c++
+void functionB() {
+   int a = 10;
+   int b = 20;
+   int c = 30;
+   int *p = &b;
+
+   cout << "a= " << a << endl;
+   cout << "b= " << b << endl;
+   cout << "c= " << c << endl;
+
+   *p = 100;
+
+   cout << "a= " << a << endl;
+   cout << "b= " << b << endl;
+   cout << "c= " << c << endl;
+} 
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+Compile and run the program.
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/c82922f0-2e86-4eab-8dda-26ffd5a74043)
+
+Now we’ll attempt to do a quick "hack" and advance the pointer 4 bytes in memory from the location of variable `b` to the location of variable `c`
+
+After line
+```c++
+*p = 100;
+```
+Add
+```c++
+p++;
+*p = 200;
+```
+Compile and run the program.
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/fc88dc28-938e-4627-9d8f-d77fa0586432)
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/2f2fad51-9a43-4f44-ad09-864ce6c4e9c0)
+
+Is this what you expected?
+
+- *This is not what the quick hack should have performed if it performed correctly, however it is what was expected as we dont know the precise location of variable c in memory so the change is not necessarily going to point to variable c.*
+
+The pointer does get advanced by 4 bytes, but the memory location is invalid. Just because we list variables a, b, and c sequentially in our programme, does not guarantee that the compiler places them contiguously in memory.
+
+If you want to do this sort of pointer arithmetic then you need to guarantee the memory layout. Arrays are a way to achieve this. We’ll look at these later in the module.
+
+For now, just be careful using pointer arithmetic. This time we were lucky and the C++ run time checking detected the error for us. You cannot rely on the run time finding more complex errors.
 
 </details>
 <details> <!-- Question 6 -->

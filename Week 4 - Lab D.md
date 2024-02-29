@@ -17,7 +17,7 @@
 #### Question 6
 - 🤔 Recap on memory locations being able to be directed outside the codes alloted space.
 #### Question 7
-
+- 🤔 Fun with pointers pointing to pointers pointing to memory locations.
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
@@ -384,17 +384,35 @@ Single-step through the code and determine the reason for the crash.
 The Windows operating system attempts to prevent applications from damaging other applications. This error message is from Windows telling you that your code has attempted to access a memory location outside of its permitted memory footprint.
 </details>
 <details> <!-- Question 7 -->
-  <summary> Q7. </summary>
+  <summary> Q7. Pointers - Pointers to pointers </summary>
 
 ## Question:
+Comment out the call to functionC and uncomment the call to functionD.
 
+![README-pointer2pointer](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/150a9aef-c04a-42e3-82bb-a8beb5fcffb0)
+
+Add code, at the position identified by the comment, to implement the above pointer chain.
+
+You will need to declare two new pointers `p` and `q`.
+
+Then add the code to change the value of `x` by using only pointer `p`.
+
+Compile and run the program. Checking your solution with the debugger and disassembler.
 ## Solution:
 ```c++
+void functionD() {
+	double x = 3.14;
+	double *q = &x;
+	double *p = q;
+
+	cout << "x= " << x << endl;
+
+	*p = 5;
+
+	cout << "x= " << x << endl;
+}
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+## Output:
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/add591ce-7173-4ee1-81c8-043f52a6f798)
 
 </details>

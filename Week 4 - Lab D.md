@@ -416,3 +416,7 @@ void functionD() {
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/add591ce-7173-4ee1-81c8-043f52a6f798)
 
 </details>
+
+
+> [!IMPORTANT]
+> `*p` means that variable `p` is a pointer to a memory location. And `&x` gets the memory location of the variable `x`.

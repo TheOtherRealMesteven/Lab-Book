@@ -237,17 +237,67 @@ void Grid::SaveGrid(const char filename[])
 
 </details>
 <details> <!-- Question 4 -->
-  <summary> Q4. </summary>
+  <summary> Q4. Pointers - Basics </summary>
 
 ## Question:
+Located the following code in source.cpp file:
+```c++
+void functionA() {
+   int a = 10;
+   int b = 20;
+   int *p = &a;
 
+   cout << "a= " << a << endl;
+   cout << "b= " << b << endl;
+
+   // Add your code here
+
+   cout << "a= " << a << endl;
+   cout << "b= " << b << endl;
+}
+```
+Add a line of code, at the position indicated by the comment, to assign the value of `100` to `a`, by using only the pointer `p`.
 ## Solution:
 ```c++
+void functionA() {
+	int a = 10;
+	int b = 20;
+	int *p = &a;
+
+	cout << "a= " << a << endl;
+	cout << "b= " << b << endl;
+
+	// Add your code here
+	*p = 100;
+
+	cout << "a= " << a << endl;
+	cout << "b= " << b << endl;
+}
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
+## Output:
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/3eab6a18-da40-4169-b0a1-4e1e8d08be3c)
+
+## Question:
+Now set a breakpoint at the line
+```c++
+int a = 10;
+```
+Run the code to the breakpoint, then single-step through the code whilst looking at the variables in the Local window.
+
+Notice how `a` and `b` are initialized with values `10` and `20`, and that pointer `p` is assigned a hexadecimal value. This value is the memory location of `a`.
+
+Open a Memory window. Copy the value of `p` into the address field of the Memory window and confirm that you are looking at variable `a` in memory.
+
+## Solution
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/fd22f2a9-13b6-4fce-a4e2-8a37a50704ac)
+
+->
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/73e0481c-5665-4bec-9072-7c35e267d3d8)
+
+
+From reviewing the changing of the values, it can be confirmed that `p` is being assigned the address field of the variable `a`. This is because `&a` is the memory location of the variable `a` and the value is being passed onto the pointer variable `p` (`*p`).
+
 ## Reflection:
 
 </details>

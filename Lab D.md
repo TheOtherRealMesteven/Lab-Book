@@ -22,6 +22,8 @@
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
 
+---
+
 <details> <!-- Question 1 -->
   <summary> Q1. Linker Errors </summary>
 
@@ -102,6 +104,8 @@ private:
 
 > [!IMPORTANT]
 > Dont necessarily need constructor and deconstructor in header file if its not defined.
+
+---
 
 <details> <!-- Question 2 -->
   <summary> Q2. Reading into Grid Class </summary>
@@ -186,6 +190,8 @@ void Grid::LoadGrid(const char filename[])
 > [!IMPORTANT]
 > `_DEBUG` is a boolean flagged by visual studio being in debug mode. 😊
 
+---
+
 <details> <!-- Question 3 -->
   <summary> Q3. Saving the Grid </summary>
 
@@ -249,6 +255,9 @@ void Grid::SaveGrid(const char filename[])
 **There is a slight discrepancy with the saved file where the new file has a trailing white space on the lines, however the load program handles this.**
 
 </details>
+
+---
+
 <details> <!-- Question 4 -->
   <summary> Q4. Pointers - Basics </summary>
 
@@ -314,6 +323,9 @@ From reviewing the changing of the values, it can be confirmed that `p` is being
 ## Reflection:
 
 </details>
+
+---
+
 <details> <!-- Question 5 -->
   <summary> Q5. Pointers - False assumptions </summary>
 
@@ -373,6 +385,9 @@ For now, just be careful using pointer arithmetic. This time we were lucky and t
 > [!IMPORTANT]
 > The above would have worked in release mode, it failed in debug mode because debug mode has a lot of space filled with `C`'s which catches pointers pointing to invalid locations. However, the code points 4 bytes above the memory location which would be the correct location in release mode.
 
+
+---
+
 <details> <!-- Question 6 -->
   <summary> Q6. Pointers - The crash </summary>
 
@@ -395,6 +410,9 @@ Single-step through the code and determine the reason for the crash.
 
 The Windows operating system attempts to prevent applications from damaging other applications. This error message is from Windows telling you that your code has attempted to access a memory location outside of its permitted memory footprint.
 </details>
+
+---
+
 <details> <!-- Question 7 -->
   <summary> Q7. Pointers - Pointers to pointers </summary>
 

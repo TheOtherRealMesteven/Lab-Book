@@ -403,11 +403,11 @@ Compile and run the program. Checking your solution with the debugger and disass
 void functionD() {
 	double x = 3.14;
 	double *q = &x;
-	double *p = q;
+	double **p = &q;
 
 	cout << "x= " << x << endl;
 
-	*p = 5;
+	**p = 5;
 
 	cout << "x= " << x << endl;
 }

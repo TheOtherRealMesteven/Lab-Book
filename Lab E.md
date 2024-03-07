@@ -7,7 +7,7 @@
 |**1**| 🤔 Learnt how to override operators
 |**2**| 🤔 
 |**3**| 🤔 
-|**4**| 🤔 
+|**4**| 🤔 Practice using reference parameters
 |**5**| 🤔 
 
 ## Lab Task Submission
@@ -97,18 +97,75 @@ n/a
 ----
 
 <details> <!-- Question 4 -->
-  <summary> Q4. </summary>
+  <summary> Q4. Parameters </summary>
 
 ## Question:
+Open and build the Parameters project. We want our program to swap the values of the two variables a and b.
+
+Compile and run the program.
+
+It does not give the correct answer; a and b are not swapped.
+
+**[LAB BOOK - Copy your code for pass-by-value and pass-by-ref into your lab book. Reflect on the difference between them]**
 
 ## Solution:
+**Pass by value:**
+
 ```c++
+#include <iostream>
+using namespace std;
+
+void myswap(int lhs, int rhs) {
+    int temp = lhs;
+    lhs = rhs;
+    rhs = temp;
+}
+ 
+int main(int, char**) { 
+    int a = 10;
+    int b = 20;
+
+    cout << "a=" << a << ", b=" << b << endl;
+
+    myswap(a, b);
+
+    cout << "a=" << a << ", b=" << b << endl;
+
+    system("PAUSE");
+    return 0;
+}
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+
+When passing the parameters by value, the function creates copies of the parameter values meaning the `lhs` and `rhs` variables have no affect on the original parameter values. And so `a` and `b` cannot be passed correctly unless it is returned through the function.
+
+**Pass by reference:**
+
+```c++
+#include <iostream>
+using namespace std;
+
+void myswap(int &lhs, int &rhs) {
+    int temp = lhs;
+    lhs = rhs;
+    rhs = temp;
+}
+ 
+int main(int, char**) { 
+    int a = 10;
+    int b = 20;
+
+    cout << "a=" << a << ", b=" << b << endl;
+
+    myswap(a, b);
+
+    cout << "a=" << a << ", b=" << b << endl;
+
+    system("PAUSE");
+    return 0;
+}
+```
+
+When passing the parameters by reference, the function stores pointers to the parameters original variables. Meaning the `lhs` and `rhs` variables have an affect on the original parameter values and so `a` and `b` can be swapped properly.
 
 </details>
 

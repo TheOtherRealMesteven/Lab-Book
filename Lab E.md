@@ -29,22 +29,22 @@ Add the following functionality to your program:
 **[LAB BOOK - Copy your code for these functions into your lab book]**
 ## Solution:
 ```c++
-// Overload the stream insertion operator (<<) to write the grid to an ostream
+// Overload the insert operator (<<) to write the grid to an ostream
 ostream& operator<<(ostream& os, const Grid& grid) {
-    for (int i = 0; i < grid._size; i++) {
-        for (int j = 0; j < grid._size; j++) {
-            os << grid.grid[i][j] << " ";
+    for (int i = 0; i < _size; i++) {
+        for (int j = 0; j < _size; j++) {
+            os << grid[i][j] << " ";
         }
         os << endl;
     }
     return os;
 }
 
-// Overload the stream extraction operator (>>) to read the grid from an istream
+// Overload the extract operator (>>) to read the grid from an istream
 istream& operator>>(istream& is, Grid& grid) {
-    for (int i = 0; i < grid._size; i++) {
-        for (int j = 0; j < grid._size; j++) {
-            if (!(is >> ws >> grid.grid[i][j])) {
+    for (int i = 0; i < _size; i++) {
+        for (int j = 0; j < _size; j++) {
+            if (!(is >> ws >> grid[i][j])) {
                 cerr << "Error: Failed to read integer from stream.\n";
                 return is;
             }

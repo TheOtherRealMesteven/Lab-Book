@@ -29,6 +29,9 @@ Add the following functionality to your program:
 **[LAB BOOK - Copy your code for these functions into your lab book]**
 ## Solution:
 ```c++
+const int _size = 9;
+int grid[_size][_size];
+
 // Overload the insert operator (<<) to write the grid to an ostream
 ostream& operator<<(ostream& os, const Grid& grid) {
     for (int i = 0; i < _size; i++) {

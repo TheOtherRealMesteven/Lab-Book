@@ -13,6 +13,8 @@
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
 
+----
+
 <details> <!-- Question 1 -->
   <summary> Q1. </summary>
 
@@ -29,10 +31,8 @@ n/a
 
 </details>
 
-> [!NOTE]
-> 
-> [!IMPORTANT]
-> 
+----
+
 <details> <!-- Question 2 -->
   <summary> Q2. </summary>
 
@@ -48,6 +48,9 @@ n/a
 ## Reflection:
 
 </details>
+
+----
+
 <details> <!-- Question 3 -->
   <summary> Q3. </summary>
 
@@ -63,6 +66,9 @@ n/a
 ## Reflection:
 
 </details>
+
+----
+
 <details> <!-- Question 4 -->
   <summary> Q4. </summary>
 
@@ -78,6 +84,9 @@ n/a
 ## Reflection:
 
 </details>
+
+----
+
 <details> <!-- Question 5 -->
   <summary> Q5. </summary>
 
@@ -93,3 +102,5 @@ n/a
 ## Reflection:
 
 </details>
+
+----

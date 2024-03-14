@@ -4,7 +4,7 @@
 *For future review, the coverage of each task has been listed below to act as an index to the taught material.*
 |Question|Learned Stuff|
 |--|--|
-|**1**| 🤔 
+|**1**| 🤔 How to create Template Classes
 |**2**| 🤔 
 |**3**| 🤔 
 
@@ -186,6 +186,8 @@ private:
 ## Changes
 - Moved methods and references from source file to header file.
 - Changed the header file class to a Template class.
+
+**Grid.h**
 ```diff
 + template<class T>
 class Grid
@@ -194,6 +196,8 @@ class Grid
 }
 ```
 - Changed the grid variable to use the template properly.
+
+**Main.cpp**
 ```diff
 int main (int, char**) {
 - 	Grid grid;
@@ -203,12 +207,13 @@ int main (int, char**) {
 	return 0;
 }
 ```
+
+**Grid.h**
 ```diff
 private:
 	static const int m_size = 9;
 -	int m_grid[m_size][m_size];
 +	T m_grid[m_size][m_size];
-};
 ```
 </details>
 

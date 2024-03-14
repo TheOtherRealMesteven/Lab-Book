@@ -5,7 +5,7 @@
 |Question|Learned Stuff|
 |--|--|
 |**1**| 🤔 How to create Template Classes
-|**2**| 🤔 
+|**2**| 🤔 Template class used with different datatype
 |**3**| 🤔 
 
 ## Lab Task Submission
@@ -220,18 +220,50 @@ private:
 ----
 
 <details> <!-- Question 2 -->
-  <summary> Q2. </summary>
+  <summary> Q2. Template Grid (Float) </summary>
 
 ## Question:
+Change the code in `main()` so that you can store `float` values instead of `int` values, i.e. `Grid<float> grid`
 
+Change some of the values in the `Grid1.txt` to floating point values and you should see the output is now correct.
 ## Solution:
+**Main.cpp**
 ```c++
+int main (int, char**)
+{
+	Grid<float> grid;
+	grid.LoadGrid("Grid1.txt");
+	grid.SaveGrid("OutGrid.txt");
+
+	return 0;
+}
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+**Grid1.txt**
+```
+1.1 2 3 4 5 6 7 8 9
+2 3 4 5 6 7 8 9 1.1
+3 4 5 6 7 8 9 1.1 2
+4 5 6 7 8 9 1.1 2 3
+5 6 7 8 9 1.1 2 3 4
+6 7 8 9 1.1 2 3 4 5
+7 8 9 1.1 2 3 4 5 6
+8 9 1.1 2 3 4 5 6 7
+9 1.1 2 3 4 5 6 7 8
+```
+**OutGrid.txt**
+```
+1.1 2 3 4 5 6 7 8 9 
+2 3 4 5 6 7 8 9 1.1 
+3 4 5 6 7 8 9 1.1 2 
+4 5 6 7 8 9 1.1 2 3 
+5 6 7 8 9 1.1 2 3 4 
+6 7 8 9 1.1 2 3 4 5 
+7 8 9 1.1 2 3 4 5 6 
+8 9 1.1 2 3 4 5 6 7 
+9 1.1 2 3 4 5 6 7 8 
+```
+## Debugger:
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/234b37e6-5c70-4687-9554-05ca3f6b35e2)
 
 </details>
 

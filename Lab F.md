@@ -6,7 +6,7 @@
 |--|--|
 |**1**| 🤔 How to create Template Classes
 |**2**| 🤔 Template class used with different datatype
-|**3**| 🤔 
+|**3**| 🤔 Binary Search: Recursion and Iteration
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
@@ -270,19 +270,70 @@ int main (int, char**)
 ----
 
 <details> <!-- Question 3 -->
-  <summary> Q3. </summary>
+  <summary> Q3. Binary Search </summary>
 
 ## Question:
+In this exercise, you'll implement two versions of a binary search, one using iteration, the other using a recursive function.
 
-## Solution:
+The text file `binarysearchIn.txt` contains 100 integers, ordered from small to large.
+
+Create a 100 element 1D array and read the numbers from the file into the array, using the streaming operators.
+
+Implement this process using a recursive function, with the following prototype
 ```c++
+bool binarySearch(int *list, int size, int value);
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+Now create a second implementation, replacing the recursive function with a single while loop
 
+Which implementation do you prefer, in terms of both readability and design intent?
+## Solution:
+<details>
+	<summary>Recursive</summary>
+
+```c++
+bool binarySearch(int* list, int size, int value)
+{
+	if (size == 0) return false;
+	int mid = size / 2;
+	if (list[mid] == value) return true;
+	else if (list[mid] > value) return binarySearch(list, mid, value);
+	else return binarySearch(list + mid + 1, size - mid - 1, value);
+}
+```
+</details>
+<details>
+	<summary>While Loop</summary>
+
+```c++
+bool binarySearch(int* list, int size, int value) {
+    int left = 0;
+    int right = size - 1;
+
+    while (left <= right) {
+        int mid = left + size / 2;
+        if (list[mid] == value) return true;
+        else if (list[mid] < value) left = mid + 1;
+        else right = mid - 1;
+        size = right - left + 1;
+    }
+    return false;
+}
+```
+</details>
+
+## Analysis
+***Readability:***
+- Recursion might be more confusing for people to follow with the self-method calls. However, the overall code is more simplistic and more readable.
+
+***Design Intent:***
+- The iterative implementation is more efficient in both storage and performance.
+	- This is due to each method in recursion using stack space for storing local variables, function arguments, and the return address.
+	- It is especially impactful if the recursive methods iterate excessively.
+- The recursive implementation is more maintainable due to its simplicity.
+
+***Conclusion:***
+
+Iteration is probably used more than recursion due to efficiency being a priority over readability. Especially as if code is less readable, it can still eventually be read.
 </details>
 
 ----

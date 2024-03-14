@@ -199,7 +199,8 @@ class Grid
 
 **Main.cpp**
 ```diff
-int main (int, char**) {
+int main (int, char**)
+{
 - 	Grid grid;
 + 	Grid<int> grid;
 	grid.LoadGrid("Grid1.txt");
@@ -305,7 +306,8 @@ bool binarySearch(int* list, int size, int value)
 	<summary>While Loop</summary>
 
 ```c++
-bool binarySearch(int* list, int size, int value) {
+bool binarySearch(int* list, int size, int value)
+{
     int left = 0;
     int right = size - 1;
 

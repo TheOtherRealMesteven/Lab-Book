@@ -19,7 +19,9 @@
 ## Question:
 You are going to turn the Grid class into a template class so that we can store any type of number, e.g. float, int, double, into our 2D grid array.
 
-## Before:
+<details>
+	<summary>Before</summary>
+
 ### Main.cpp
 ```c++
 #include <iostream>
@@ -105,7 +107,10 @@ private:
 	int m_grid[m_size][m_size];
 };
 ```
-## After:
+</details>
+<details>
+	<summary>After</summary>
+	
 ### Main.cpp
 ```c++
 #include <iostream>
@@ -176,7 +181,35 @@ private:
 	T m_grid[m_size][m_size];
 };
 ```
+</details>
 
+## Changes
+- Moved methods and references from source file to header file.
+- Changed the header file class to a Template class.
+```diff
++ template<class T>
+class Grid
+{
+...
+}
+```
+- Changed the grid variable to use the template properly.
+```diff
+int main (int, char**) {
+- 	Grid grid;
++ 	Grid<int> grid;
+	grid.LoadGrid("Grid1.txt");
+	grid.SaveGrid("OutGrid.txt");
+	return 0;
+}
+```
+```diff
+private:
+	static const int m_size = 9;
+-	int m_grid[m_size][m_size];
++	T m_grid[m_size][m_size];
+};
+```
 </details>
 
 ----

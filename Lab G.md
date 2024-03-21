@@ -233,5 +233,11 @@ void Utility::Process() const
 > [!IMPORTANT]
 > `delete[]` is used to clear an array of memory locations.
 
+> [!IMPORTANT]
+> ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/3614fd58-06c9-4f58-aa53-aaf040d63453)
+> 
+> The above screenshot is useful for checking that Parasoft is scanning all the files properly. The files scanned (3) should equal how many source and header files you have.
+
+
 ----
 

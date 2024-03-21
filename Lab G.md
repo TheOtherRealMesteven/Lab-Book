@@ -142,7 +142,39 @@ private:
 {
 ```
 </details>
+<details>
+  <summary>[Severity 3] Declare assignment operator and copy constructor</summary>
+
+### Changes
+#### Errors
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8270af61-070f-45f9-adc7-4471060e6522)
+⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/7365a2e8-fdac-48fe-b789-b510acdabd33)
+
+
+#### Code
+**Utility.h**
+```diff
+#pragma once
+class Utility final
+{
+public:
+	Utility();
+	~Utility() = delete;
++	Utility(const Utility&) = delete;		// Delete the copy constructor
++	Utility& operator=(const Utility&) = delete;	// Delete the copy assignment operator
+	void SetSize(const int size);
+	void Process() const;
+	int Mult(int a, int b) const;
+
+private:
+	int *m_numberArray;
+	int m_size;
+};
+```
+</details>
 
 </details>
 
 ----
+

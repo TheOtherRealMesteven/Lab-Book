@@ -53,16 +53,60 @@ Follow the instructions on [Canvas - 500083](https://canvas.hull.ac.uk/courses/6
 <details> <!-- Question 2 -->
   <summary> Q2. Testing with Parasoft </summary>
 
-## Question:
+### Errors to fix
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8d2d9a5b-c555-46a5-af2d-eda5d3ed0981)
 
-## Solution:
+<details>
+  <summary> Severity 1 </summary>
+
+We are going to fix the first Severity 1 rule violation in `Utility.h` that Parasoft displays `A class 'Utility' must declare a copy assignment operator`
+
+1. Go to the line of code (line 6 of `Utility.h`); this can be done by double-clicking on the violation.
+2. Change this line appropriately.
+3. Re-run Parasoft on the whole project, and you should see that there are now 10 violations, as we have now fixed the one on line 6.
+
+### Before
 ```c++
+#pragma once
+class Utility
+{
+public:
+	Utility(void);
+	~Utility(void);
+	void SetSize(const int size);
+	void Process() const;
+	int Mult(int a, int b) const;
+
+private:
+	int *m_numberArray;
+	int m_size;
+};
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8d2d9a5b-c555-46a5-af2d-eda5d3ed0981)
+### After
+```c++
+#pragma once
+class Utility
+{
+public:
+	Utility(void);
+	~Utility(void) = delete;
+	void SetSize(const int size);
+	void Process() const;
+	int Mult(int a, int b) const;
+
+private:
+	int *m_numberArray;
+	int m_size;
+};
+```
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/cd599197-94e5-4b5e-bfa7-2dddf6bfb051)
+
+</details>
+
+<details>
+  <summary> Severity 3 </summary>
+</details>
 
 </details>
 

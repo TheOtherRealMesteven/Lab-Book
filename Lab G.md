@@ -152,17 +152,18 @@ Utility& Utility::operator=(const Utility& other)
 Void represents nothing in the programming language. And by leaving the parameters blank, it is implied that there are no parameters.
 ### Changes
 #### Errors
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/500b63c3-0757-4bcd-9283-e949759878ca)
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/64120513-6821-4bc5-bed2-888acda3fe92)
 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a3c7ba2b-6392-4dcf-8957-b71b65fbbde4)
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/b25f7b48-3b19-4ec4-8848-b679f1247d91)
+
 
 #### Code
 **Utility.h**
 ```diff
 -	Utility(void);
--	~Utility(void) = delete;
+-	~Utility(void);
 +	Utility();
-+	~Utility() = delete;
++	~Utility();
 ```
 **Utility.cpp**
 ```diff
@@ -184,9 +185,10 @@ Void represents nothing in the programming language. And by leaving the paramete
 By defining the class as final, it prevents users from inheriting from the class and misusing it.
 ### Changes
 #### Errors
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a3c7ba2b-6392-4dcf-8957-b71b65fbbde4)
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/b25f7b48-3b19-4ec4-8848-b679f1247d91)
 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8270af61-070f-45f9-adc7-4471060e6522)
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/344cefaa-b0e8-4488-aa0d-2a7855d0f426)
+
 
 
 #### Code
@@ -196,41 +198,6 @@ By defining the class as final, it prevents users from inheriting from the class
 -class Utility
 +class Utility final
 {
-```
-</details>
-<details>
-  <summary>[Severity 3] Declare assignment operator and copy constructor</summary>
-
-### Brief
-Normally, the copy constructor and copy assignment operator features are handled by the compiler. But, they have been flagged by Parasoft as it could be used incorrectly and therefore, it is preferable for the programmers to define it themselves.
-
-*Due to the two features not being used, it is easier to delete them so they have no functionality rather than implement it and waste time.*
-### Changes
-#### Errors
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8270af61-070f-45f9-adc7-4471060e6522)
-⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/7365a2e8-fdac-48fe-b789-b510acdabd33)
-
-
-#### Code
-**Utility.h**
-```diff
-#pragma once
-class Utility final
-{
-public:
-	Utility();
-	~Utility() = delete;
-+	Utility(const Utility&) = delete;		// Delete the copy constructor
-+	Utility& operator=(const Utility&) = delete;	// Delete the copy assignment operator
-	void SetSize(const int size);
-	void Process() const;
-	int Mult(int a, int b) const;
-
-private:
-	int *m_numberArray;
-	int m_size;
-};
 ```
 </details>
 

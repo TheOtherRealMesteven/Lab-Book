@@ -57,7 +57,7 @@ Follow the instructions on [Canvas - 500083](https://canvas.hull.ac.uk/courses/6
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8d2d9a5b-c555-46a5-af2d-eda5d3ed0981)
 
 <details>
-  <summary> Severity 1 </summary>
+  <summary>[Severity 1] Declare a copy assignment operator</summary>
 
 We are going to fix the first Severity 1 rule violation in `Utility.h` that Parasoft displays `A class 'Utility' must declare a copy assignment operator`
 
@@ -65,14 +65,22 @@ We are going to fix the first Severity 1 rule violation in `Utility.h` that Para
 2. Change this line appropriately.
 3. Re-run Parasoft on the whole project, and you should see that there are now 10 violations, as we have now fixed the one on line 6.
 
-### Before
-```c++
+### Changes
+#### Findings
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/7f2d89a8-f671-415a-ae31-3bd4dceb635c)
+⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a79dc386-7d32-4ed5-9102-e62b814f11e3)
+
+#### Code
+**Utility.h**
+```diff
 #pragma once
 class Utility
 {
 public:
 	Utility(void);
-	~Utility(void);
+-	~Utility(void);
++	~Utility(void) = delete;
 	void SetSize(const int size);
 	void Process() const;
 	int Mult(int a, int b) const;
@@ -82,30 +90,37 @@ private:
 	int m_size;
 };
 ```
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8d2d9a5b-c555-46a5-af2d-eda5d3ed0981)
-### After
-```c++
-#pragma once
-class Utility
-{
-public:
-	Utility(void);
-	~Utility(void) = delete;
-	void SetSize(const int size);
-	void Process() const;
-	int Mult(int a, int b) const;
-
-private:
-	int *m_numberArray;
-	int m_size;
-};
-```
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/cd599197-94e5-4b5e-bfa7-2dddf6bfb051)
 
 </details>
 
 <details>
-  <summary> Severity 3 </summary>
+  <summary>[Severity 3] Void Parameters</summary>
+
+### Changes
+#### Errors
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/500b63c3-0757-4bcd-9283-e949759878ca)
+⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a3c7ba2b-6392-4dcf-8957-b71b65fbbde4)
+
+#### Code
+**Utility.h**
+```diff
+-	Utility(void);
+-	~Utility(void) = delete;
++	Utility();
++	~Utility() = delete;
+```
+**Utility.cpp**
+```diff
+-Utility::Utility(void) : m_numberArray(nullptr), m_size(0)
++Utility::Utility() : m_numberArray(nullptr), m_size(0)
+{
+}
+
+-Utility::~Utility(void)
++Utility::~Utility() 
+```
+
 </details>
 
 </details>

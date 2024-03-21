@@ -110,7 +110,6 @@ The copy assignment operator is used to copy the contents from one instance to a
 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/64120513-6821-4bc5-bed2-888acda3fe92)
 
-
 #### Code
 **Utility.h**
 ```diff
@@ -156,7 +155,6 @@ Void represents nothing in the programming language. And by leaving the paramete
 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/b25f7b48-3b19-4ec4-8848-b679f1247d91)
 
-
 #### Code
 **Utility.h**
 ```diff
@@ -189,8 +187,6 @@ By defining the class as final, it prevents users from inheriting from the class
 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/344cefaa-b0e8-4488-aa0d-2a7855d0f426)
 
-
-
 #### Code
 **Utility.h**
 ```diff
@@ -198,6 +194,32 @@ By defining the class as final, it prevents users from inheriting from the class
 -class Utility
 +class Utility final
 {
+```
+</details>
+
+<details>
+  <summary>[Severity 3] Declare local variable 'result' as a constant</summary>
+
+### Brief
+By defining the variable within the iterative loop, the variable is constantly being reinitialized. This is definitely not optimal especially as it is being used for nothing.
+### Changes
+#### Errors
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/344cefaa-b0e8-4488-aa0d-2a7855d0f426)
+⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/59e86c26-f879-4d53-ba93-b792e95963ea)
+
+#### Code
+**Utility.cpp**
+```diff
+void Utility::Process() const
+{
++	int result;
+	for(int n = 0; n < m_size-1; ++n)
+	{
+-		int result = Mult(m_numberArray[n], m_numberArray[n+1]);
++		result = Mult(m_numberArray[n], m_numberArray[n+1]);
+	}
+}
 ```
 </details>
 

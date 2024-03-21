@@ -66,7 +66,7 @@ We are going to fix the first Severity 1 rule violation in `Utility.h` that Para
 3. Re-run Parasoft on the whole project, and you should see that there are now 10 violations, as we have now fixed the one on line 6.
 
 ### Changes
-#### Findings
+#### Errors
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/7f2d89a8-f671-415a-ae31-3bd4dceb635c)
 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a79dc386-7d32-4ed5-9102-e62b814f11e3)
@@ -121,6 +121,26 @@ private:
 +Utility::~Utility() 
 ```
 
+</details>
+
+<details>
+  <summary>[Severity 3] Declare Unity class as final</summary>
+
+### Changes
+#### Errors
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a3c7ba2b-6392-4dcf-8957-b71b65fbbde4)
+⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8270af61-070f-45f9-adc7-4471060e6522)
+
+
+#### Code
+**Utility.h**
+```diff
+#pragma once
+-class Utility
++class Utility final
+{
+```
 </details>
 
 </details>

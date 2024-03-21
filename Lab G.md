@@ -7,6 +7,10 @@
 |**1**| 🤔 How to install Parasoft
 | | 🤔 How to install the Parasoft test rule set
 |**2**| 🤔 How to use Parasoft for testing
+| | 🤔 Why we are using Parasoft for testing
+| | 🤔 How to implement `Copy Constructor` method
+| | 🤔 How to implement `Copy Assignment Operator` method
+| | 🤔 What `final`  is used for
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*

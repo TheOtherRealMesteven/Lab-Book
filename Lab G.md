@@ -66,14 +66,12 @@ We are going to fix the first Severity 1 rule violation in `Utility.h` that Para
 3. Re-run Parasoft on the whole project, and you should see that there are now 10 violations, as we have now fixed the one on line 6.
 
 ### Brief
-Normally, the copy constructor and copy assignment operator features are handled by the compiler. But, they have been flagged by Parasoft as it could be used incorrectly and therefore, it is preferable for the programmers to define it themselves.
-
-*Due to the two features not being used, it is easier to delete them so they have no functionality rather than implement it and waste time.*
+The copy constructor is used to copy the classes details from one instance to another and this method is usually handled by the compiler.
 ### Changes
 #### Errors
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/7f2d89a8-f671-415a-ae31-3bd4dceb635c)
 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
-![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/a79dc386-7d32-4ed5-9102-e62b814f11e3)
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/d44a9d76-300a-41d4-a904-33b1a0160980)
 
 #### Code
 **Utility.h**
@@ -83,16 +81,21 @@ class Utility
 {
 public:
 	Utility(void);
--	~Utility(void);
-+	~Utility(void) = delete;
-	void SetSize(const int size);
-	void Process() const;
-	int Mult(int a, int b) const;
+	~Utility(void);
 
-private:
-	int *m_numberArray;
-	int m_size;
-};
++	Utility(const Utility& u); // Copy Constructor
+	void SetSize(const int size);
+	...
+```
+**Utility.cpp**
+```c++
+// Copy Constructor
+Utility::Utility(const Utility& other) : m_numberArray(nullptr), m_size(other.m_size)
+{
+	if (!other.m_numberArray) return;
+	m_numberArray = new int[m_size];
+	for (int i = 0; i < m_size; i++) m_numberArray[i] = other.m_numberArray[i];
+}
 ```
 
 </details>

@@ -57,16 +57,10 @@ Follow the instructions on [Canvas - 500083](https://canvas.hull.ac.uk/courses/6
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/8d2d9a5b-c555-46a5-af2d-eda5d3ed0981)
 
 <details>
-  <summary>[Severity 1] Declare a copy assignment operator</summary>
-
-We are going to fix the first Severity 1 rule violation in `Utility.h` that Parasoft displays `A class 'Utility' must declare a copy assignment operator`
-
-1. Go to the line of code (line 6 of `Utility.h`); this can be done by double-clicking on the violation.
-2. Change this line appropriately.
-3. Re-run Parasoft on the whole project, and you should see that there are now 10 violations, as we have now fixed the one on line 6.
+  <summary>[Severity 1] Declare a copy constructor</summary>
 
 ### Brief
-The copy constructor is used to copy the classes details from one instance to another and this method is usually handled by the compiler.
+The copy constructor is used to copy the classes details from one instance to a new instance of the class and this method is usually handled by the compiler.
 ### Changes
 #### Errors
 ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/7f2d89a8-f671-415a-ae31-3bd4dceb635c)
@@ -83,7 +77,7 @@ public:
 	Utility(void);
 	~Utility(void);
 
-+	Utility(const Utility& u); // Copy Constructor
++	Utility(const Utility& other); // Copy Constructor
 	void SetSize(const int size);
 	...
 ```
@@ -95,6 +89,57 @@ Utility::Utility(const Utility& other) : m_numberArray(nullptr), m_size(other.m_
 	if (!other.m_numberArray) return;
 	m_numberArray = new int[m_size];
 	for (int i = 0; i < m_size; i++) m_numberArray[i] = other.m_numberArray[i];
+}
+```
+
+</details>
+<details>
+  <summary>[Severity 1] Declare a copy assignment operator</summary>
+
+We are going to fix the first Severity 1 rule violation in `Utility.h` that Parasoft displays `A class 'Utility' must declare a copy assignment operator`
+
+1. Go to the line of code (line 6 of `Utility.h`); this can be done by double-clicking on the violation.
+2. Change this line appropriately.
+3. Re-run Parasoft on the whole project, and you should see that there are now 10 violations, as we have now fixed the one on line 6.
+   
+### Brief
+The copy assignment operator is used to copy the contents from one instance to another and this method is usually handled by the compiler.
+### Changes
+#### Errors
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/d44a9d76-300a-41d4-a904-33b1a0160980)
+⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/64120513-6821-4bc5-bed2-888acda3fe92)
+
+
+#### Code
+**Utility.h**
+```diff
+#pragma once
+class Utility
+{
+public:
+	Utility(void);
+	~Utility(void);
+
+	Utility(const Utility& other); // Copy Constructor
++	Utility& operator = (const Utility& other); // Copy Assignment Operator
+
+	void SetSize(const int size);
+	...
+```
+**Utility.cpp**
+```c++
+// Copy Assignment Operator
+Utility& Utility::operator=(const Utility& other)
+{
+	if (this != &other)
+	{
+		delete[] m_numberArray;
+		m_size = other.m_size;
+		m_numberArray = new int[m_size];
+		for (int i = 0; i < m_size; i++) m_numberArray[i] = other.m_numberArray[i];
+	}
+	return *this;
 }
 ```
 

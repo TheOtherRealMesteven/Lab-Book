@@ -11,6 +11,7 @@
 | | 🤔 How to implement `Copy Constructor` method
 | | 🤔 How to implement `Copy Assignment Operator` method
 | | 🤔 What `final`  is used for
+| | 🤔 What `delete[]`  is used for
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
@@ -228,6 +229,9 @@ void Utility::Process() const
 </details>
 
 </details>
+
+> [!IMPORTANT]
+> `delete[]` is used to clear an array of memory locations.
 
 ----
 

@@ -8,7 +8,9 @@
 | | 🤔 Getters and setters
 |**2**| 🤔 Heap memory management
 | | 🤔 Adding elements to the end of linked lists
-|**3**| 🤔 
+|**3**| 🤔 Searching Linked Lists
+| | 🤔 Deleting from Linked Lists
+| | 🤔 Outputting Linked Lists
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
@@ -142,7 +144,8 @@ We are instantiating a new `PersonNode` on the heap therefore we are required to
 ```c++
 AddressBookSLL::~AddressBookSLL(void)
 {
-   while (m_head->m_next != nullptr) {
+   while (m_head->m_next != nullptr)
+   {
       PersonNode* previous = m_head;
       PersonNode* current = m_head;
       while (current->m_next != nullptr)
@@ -188,16 +191,17 @@ AddressBookSLL::AddressBookSLL(void) : m_head(nullptr)
 
 AddressBookSLL::~AddressBookSLL(void)
 {
-    while (m_head->m_next != nullptr) {
-        PersonNode* previous = m_head;
+    while (m_head -> m_next != nullptr)
+    {
+        PersonNode* prev = m_head;
         PersonNode* current = m_head;
-        while (current->m_next != nullptr)
+        while (current -> m_next != nullptr)
         {
-            previous = current;
-            current = current->m_next;
+            prev = current;
+            current = current -> m_next;
         }
         delete current;
-        previous->m_next = nullptr;
+        prev -> m_next = nullptr;
     }
     delete m_head;
     m_head = nullptr;
@@ -206,17 +210,12 @@ AddressBookSLL::~AddressBookSLL(void)
 void AddressBookSLL::AddPerson(const string& name, int age) 
 {
     PersonNode* newPerson = new PersonNode(name, age);
-    if (m_head == nullptr) 
-    {
-        m_head = newPerson;
-    }
+    if (m_head == nullptr) { m_head = newPerson; }
     else 
     {
         PersonNode* current = m_head;
-        while (current->getNext() != nullptr) {
-            current = const_cast<PersonNode*>(current->getNext());
-        }
-        current->setNext(newPerson);
+        while (current -> getNext() != nullptr) { current = const_cast<PersonNode*>(current -> getNext()); }
+        current -> setNext(newPerson);
     }
 }
 
@@ -253,17 +252,17 @@ AddressBookSLL::AddressBookSLL(void) : m_head(nullptr)
 
 AddressBookSLL::~AddressBookSLL(void)
 {
-+    while (m_head->m_next != nullptr)
++    while (m_head -> m_next != nullptr)
 +    {
-+        PersonNode* previous = m_head;
++        PersonNode* prev = m_head;
 +        PersonNode* current = m_head;
-+        while (current->m_next != nullptr)
++        while (current -> m_next != nullptr)
 +        {
-+            previous = current;
-+            current = current->m_next;
++            prev = current;
++            current = current -> m_next;
 +        }
 +        delete current;
-+        previous->m_next = nullptr;
++        prev -> m_next = nullptr;
 +    }
 +    delete m_head;
 +    m_head = nullptr;
@@ -276,8 +275,8 @@ AddressBookSLL::~AddressBookSLL(void)
 +    else 
 +    {
 +        PersonNode* current = m_head;
-+        while (current->getNext() != nullptr) { current = const_cast<PersonNode*>(current->getNext()); }
-+        current->setNext(newPerson);
++        while (current -> getNext() != nullptr) { current = const_cast<PersonNode*>(current -> getNext()); }
++        current -> setNext(newPerson);
 +    }
 +}
 
@@ -308,6 +307,24 @@ const PersonNode* FindPerson(const string& name) const;
 
 This method should return the `PersonNode` if the `PersonNode` is found or return `nullptr` if it is not found.
 
+<details>
+	<summary> FindPerson </summary>
+
+
+```c++
+const PersonNode* AddressBookSLL::FindPerson(const std::string& name) const
+{
+    const PersonNode* current = m_head;
+    while (current != nullptr)
+    {
+        if (current -> getName() == name) { return current; }
+        current = current -> getNext();
+    }
+    return nullptr;
+}
+```
+</details>
+
 2. The ability to delete a person from the SLL by using their name:
 
 ```c++
@@ -316,9 +333,71 @@ bool DeletePerson(const string& name);
 
 This method should return `true` if the `PersonNode` was deleted or return `false` if it is not deleted (i.e. not found).
 
-3. The ability to output all of the people’s names and ages that our in the AddressBookSLL to an `ostream`.
-## Solution:
+<details>
+	<summary> DeletePerson </summary>
+
+
 ```c++
+bool AddressBookSLL::DeletePerson(const std::string& name)
+{
+    PersonNode* current = m_head;
+    PersonNode* prev = nullptr;
+
+    while (current != nullptr)
+    {
+        if (current -> getName() == name)
+        { // Delete the node
+            if (prev != nullptr) { prev -> setNext(current -> getNext()); }
+            else { m_head = current -> getNext(); }
+            delete current;
+            return true;
+        }
+        prev = current;
+        current = current -> getNext();
+    }
+    return false;
+}
+```
+</details>
+
+3. The ability to output all of the people’s names and ages that our in the AddressBookSLL to an `ostream`.
+
+<details>
+	<summary> OutputAllPeople </summary>
+
+```c++
+void AddressBookSLL::OutputAllPeople(std::ostream& outputStream) const
+{
+    const PersonNode* current = m_head;
+    while (current != nullptr)
+    {
+        outputStream << "Name: " << current -> getName() << ", Age: " << current -> getAge() << std::endl;
+        current = current -> getNext();
+    }
+}
+```
+</details>
+
+To implement the above methods, the following changes are made:
+### AddressBookSLL.h
+```diff
+
+#include "PersonNode.h"
+
+class AddressBookSLL
+{
+public:
+	AddressBookSLL(void);
+	~AddressBookSLL(void);
+
+	void AddPerson(const string& name, int age);
++       const PersonNode* FindPerson(const std::string& name) const;
++       bool DeletePerson(const std::string& name);
++       void OutputAllPeople(std::ostream& os) const;
+
+private:
+	PersonNode* m_head;
+};
 ```
 
 </details>

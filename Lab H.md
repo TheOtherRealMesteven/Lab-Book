@@ -289,6 +289,27 @@ void AddPerson(const string& name, int age);
 So the header file includes the method description whilst the source file contains the code which iterates through a valid list and adds the new person to the end of the list.
 
 </details>
+
+## Testing:
+### main.cpp
+```c++
+int main(int argc, char **argv)
+{
+	AddressBookSLL book;
+	book.AddPerson("Darren", 21);
+	book.AddPerson("Dawn", 42);
+	book.AddPerson("Steven", 18);
+	book.AddPerson("Sue", 27);
+
+	system("PAUSE");
+}
+```
+
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/ad4f6903-1112-4fc8-94aa-94adf7741f3b)
+
+Based on the screenshot above, which shows what the `linked list` contains during runtime, we can see that objects with the specified parameters are successfully added to the list. Including the pointer to the next element in the list.
+
+
 </details>
 
 ----
@@ -296,7 +317,7 @@ So the header file includes the method description whilst the source file contai
 <details> <!-- Question 3 -->
   <summary> Q3. Find, Delete, Output </summary>
 
-## Question:
+## Questions and Solutions:
 Add the following functionality to the `AddressBookSLL` class:
 
 1. The ability to find a person from the SLL by using their name:
@@ -312,7 +333,7 @@ This method should return the `PersonNode` if the `PersonNode` is found or retur
 
 
 ```c++
-const PersonNode* AddressBookSLL::FindPerson(const std::string& name) const
+const PersonNode* AddressBookSLL::FindPerson(const string& name) const
 {
     const PersonNode* current = m_head;
     while (current != nullptr)
@@ -338,7 +359,7 @@ This method should return `true` if the `PersonNode` was deleted or return `fals
 
 
 ```c++
-bool AddressBookSLL::DeletePerson(const std::string& name)
+bool AddressBookSLL::DeletePerson(const string& name)
 {
     PersonNode* current = m_head;
     PersonNode* prev = nullptr;
@@ -366,12 +387,12 @@ bool AddressBookSLL::DeletePerson(const std::string& name)
 	<summary> OutputAllPeople </summary>
 
 ```c++
-void AddressBookSLL::OutputAllPeople(std::ostream& outputStream) const
+void AddressBookSLL::OutputAllPeople(ostream& outputStream) const
 {
     const PersonNode* current = m_head;
     while (current != nullptr)
     {
-        outputStream << "Name: " << current -> getName() << ", Age: " << current -> getAge() << std::endl;
+        outputStream << "Name: " << current -> getName() << ", Age: " << current -> getAge() << endl;
         current = current -> getNext();
     }
 }
@@ -379,6 +400,7 @@ void AddressBookSLL::OutputAllPeople(std::ostream& outputStream) const
 </details>
 
 To implement the above methods, the following changes are made:
+## Additional Code Requirements:
 ### AddressBookSLL.h
 ```diff
 
@@ -392,15 +414,50 @@ public:
 	~AddressBookSLL(void);
 
 	void AddPerson(const string& name, int age);
-+       const PersonNode* FindPerson(const std::string& name) const;
-+       bool DeletePerson(const std::string& name);
-+       void OutputAllPeople(std::ostream& os) const;
++       const PersonNode* FindPerson(const string& name) const;
++       bool DeletePerson(const string& name);
++       void OutputAllPeople(ostream& os) const;
 
 private:
 	PersonNode* m_head;
 };
 ```
 
+## Testing:
+### main.cpp
+```c++
+int main(int argc, char **argv)
+{
+	AddressBookSLL book;
+	book.AddPerson("Darren", 21);
+	book.AddPerson("Dawn", 42);
+	book.AddPerson("Steven", 18);
+	book.AddPerson("Sue", 27);
+
+	// Output Test
+	book.OutputAllPeople(cout);
+
+	// Delete Test
+	if (book.DeletePerson("Dawn"))
+        {
+            cout << "Delete Successful" << endl;
+            book.OutputAllPeople(cout);
+        }
+
+	// Find Test
+	const PersonNode* temp = book.FindPerson("Steven");
+	if (temp != nullptr) cout << "Found Desired Person" << endl;
+
+	system("PAUSE");
+}
+```
+|Test|Evidence|Pass|
+|--|--|--|
+|Output Test| ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/f393e04c-7fcb-4f0d-b200-2b349c823e38) | ✅
+|Delete Test| ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/2c32b30f-55ab-42f0-aa00-ae84e3ef76aa) | ✅ 
+|Find Test | ![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/5c9a70a4-f668-42ea-a18f-1b4e54e7bb23) | ✅
+
+All tests passed, showing the code worked as expected, successfully.
 </details>
 
 ----

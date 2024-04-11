@@ -111,36 +111,85 @@ Furthermore, the ``friend class`` allows that class to reference the private mem
 ----
 
 <details> <!-- Question 2 -->
-  <summary> Q2. </summary>
+  <summary> Q2. AddressBookSLL </summary>
 
 ## Question:
+The `AddressBookSLL` class is required to have the functionality to allow for manipulation of the `PersonNodes` that are contained within the SLL.  The `AddressBookSLL` class has a head `PersonNode` called `m_head`.  This will point to the first `PersonNode` in the list.
 
+We require the functionality to add a new person’s details into  `AddressBookSLL`.  Therefore implement the functionality of a public member method using the following method prototype:
+
+```c++
+void AddPerson(const string& name, int age);
+``` 
+
+This `AddPerson()` method should add a new `PersonNode` to the SLL according to the following pseudo code (it is suggested that you draw a diagram of what is happening before you start to implement this code):
+
+1. If the `m_head` pointer is `nullptr` (i.e. the SLL is empty) then assign a new `PersonNode` to the `m_head` pointer using the provided name and age.
+2. Otherwise, if the `m_head` pointer is not `nullptr` and the `m_head` pointer has a `m_next` pointer that is `nullptr` (i.e. there is only one element in the SLL) then assign the new `PersonNode` to this `m_next` pointer.
+3. Otherwise, navigate through each linked `PersonNode` in the SLL until we find a `PersonNode` that has a `m_next` pointer that is `nullptr`, then assign the new `PersonNode` to this `m_next`. 
+
+To test your code, add the following code to your `main()` method:
+```c++
+	book.AddPerson("Darren", 21);
+	book.AddPerson("Dawn", 42);
+	book.AddPerson("Steven", 18);
+	book.AddPerson("Sue", 27);
+```
+
+We are instantiating a new `PersonNode` on the heap therefore we are required to take care of our own memory management.  Therefore add the following functionality in the AddressBookSLL’s destructor that will delete any memory that has been created in the `AddressBookSLL` and linked `PersonNode`.
+
+```c++
+AddressBookSLL::~AddressBookSLL(void)
+{
+   while (m_head->m_next != nullptr) {
+      PersonNode* previous = m_head;
+      PersonNode* current = m_head;
+      while (current->m_next != nullptr)
+      {
+         previous = current;
+         current = current->m_next;
+      }
+      delete current;
+      previous->m_next = nullptr;
+   }
+   delete m_head;
+   m_head = nullptr;
+}
+```
 ## Solution:
 ```c++
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
 
 </details>
 
 ----
 
 <details> <!-- Question 3 -->
-  <summary> Q3. </summary>
+  <summary> Q3. Find, Delete, Output </summary>
 
 ## Question:
+Add the following functionality to the `AddressBookSLL` class:
 
+1. The ability to find a person from the SLL by using their name:
+
+```c++
+const PersonNode* FindPerson(const string& name) const;
+```
+
+This method should return the `PersonNode` if the `PersonNode` is found or return `nullptr` if it is not found.
+
+2. The ability to delete a person from the SLL by using their name:
+
+```c++
+bool DeletePerson(const string& name);
+```
+
+This method should return `true` if the `PersonNode` was deleted or return `false` if it is not deleted (i.e. not found).
+
+3. The ability to output all of the people’s names and ages that our in the AddressBookSLL to an `ostream`.
 ## Solution:
 ```c++
 ```
-## Test data:
-n/a
-## Sample output:
-n/a
-## Reflection:
 
 </details>
 

@@ -30,7 +30,7 @@ We will be required to set and return the `m_next` pointer to the `AddressBookSL
 <details>
   <summary> Code </summary>
 
-## PersonNode.h
+### PersonNode.h
 ```c++
 #include <string>
 using namespace std;
@@ -67,6 +67,7 @@ private:
 <details>
   <summary> Changes </summary>
 
+### PersonNode.h
 ```diff
 #include <string>
 using namespace std;

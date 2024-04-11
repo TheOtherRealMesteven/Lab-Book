@@ -111,6 +111,9 @@ Furthermore, the ``friend class`` allows that class to reference the private mem
 </details>
 </details>
 
+> [!NOTE]
+> the ``friend class [classname]`` allows the specified class `[classname]` to reference the private members as if referencing them from within the current class.
+
 ----
 
 <details> <!-- Question 2 -->
@@ -312,6 +315,9 @@ Based on the screenshot above, which shows what the `linked list` contains durin
 
 </details>
 
+> [!IMPORTANT]
+> We are instantiating things onto the heap so we **NEED** to **REMEMBER** to take care of our own memory management: Adding functionality to the destructors to delete any memory that has been created in the instantiated classes.
+
 ----
 
 <details> <!-- Question 3 -->
@@ -459,5 +465,12 @@ int main(int argc, char **argv)
 
 All tests passed, showing the code worked as expected, successfully.
 </details>
+
+> [!NOTE]
+> Dont forget, you cant pass a `const` value straight to a regular value of the same datatype. You must cast it like so:
+> 
+> ``const PersonNode* constPerson;``
+> 
+> ``PersonNode* person = const_cast<PersonNode*>(constPerson);``
 
 ----

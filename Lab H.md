@@ -347,13 +347,13 @@ bool AddressBookSLL::DeletePerson(const std::string& name)
     {
         if (current -> getName() == name)
         { // Delete the node
-            if (prev != nullptr) { prev -> setNext(current -> getNext()); }
-            else { m_head = current -> getNext(); }
+            if (prev != nullptr) { prev -> setNext(const_cast<PersonNode*>(current -> getNext())); }
+            else { m_head = const_cast<PersonNode*>(current -> getNext()); }
             delete current;
             return true;
         }
         prev = current;
-        current = current -> getNext();
+        current = const_cast<PersonNode*>(current -> getNext());
     }
     return false;
 }
@@ -383,6 +383,7 @@ To implement the above methods, the following changes are made:
 ```diff
 
 #include "PersonNode.h"
++#include <iostream>
 
 class AddressBookSLL
 {

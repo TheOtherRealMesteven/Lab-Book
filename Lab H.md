@@ -6,7 +6,8 @@
 |--|--|
 |**1**| 🤔 Friend classes (Allow classes to access private fields)
 | | 🤔 Getters and setters
-|**2**| 🤔 
+|**2**| 🤔 Heap memory management
+| | 🤔 Adding elements to the end of linked lists
 |**3**| 🤔 
 
 ## Lab Task Submission
@@ -101,7 +102,7 @@ private:
 +	const PersonNode* getNext() const { return m_next; }
 };
 ```
-### Description
+#### Description
 The changes to the code above create getters and setters for all the private member variables of the class. Whilst keeping the `m_next` field privatised.
 Furthermore, the ``friend class`` allows that class to reference the private members as if referencing them from within the current class.
 
@@ -157,9 +158,138 @@ AddressBookSLL::~AddressBookSLL(void)
 }
 ```
 ## Solution:
+<details>
+	<summary> Code </summary>
+
+### AddressBookSLL.h
 ```c++
+#include "PersonNode.h"
+
+class AddressBookSLL
+{
+public:
+	AddressBookSLL(void);
+	~AddressBookSLL(void);
+
+	void AddPerson(const string& name, int age);
+
+private:
+	PersonNode* m_head;
+};
 ```
 
+### AddressBookSLL.cpp
+```c++
+#include "AddressBookSLL.h"
+
+AddressBookSLL::AddressBookSLL(void) : m_head(nullptr)
+{
+}
+
+AddressBookSLL::~AddressBookSLL(void)
+{
+    while (m_head->m_next != nullptr) {
+        PersonNode* previous = m_head;
+        PersonNode* current = m_head;
+        while (current->m_next != nullptr)
+        {
+            previous = current;
+            current = current->m_next;
+        }
+        delete current;
+        previous->m_next = nullptr;
+    }
+    delete m_head;
+    m_head = nullptr;
+}
+
+void AddressBookSLL::AddPerson(const string& name, int age) 
+{
+    PersonNode* newPerson = new PersonNode(name, age);
+    if (m_head == nullptr) 
+    {
+        m_head = newPerson;
+    }
+    else 
+    {
+        PersonNode* current = m_head;
+        while (current->getNext() != nullptr) {
+            current = const_cast<PersonNode*>(current->getNext());
+        }
+        current->setNext(newPerson);
+    }
+}
+
+
+```
+</details>
+<details>
+	<summary> Changes </summary>
+
+### AddressBookSLL.h
+```diff
+#include "PersonNode.h"
+
+class AddressBookSLL
+{
+public:
+	AddressBookSLL(void);
+	~AddressBookSLL(void);
+
++	void AddPerson(const string& name, int age);
+private:
+	PersonNode* m_head;
+};
+
+```
+
+### AddressBookSLL.cpp
+```diff
+#include "AddressBookSLL.h"
+
+AddressBookSLL::AddressBookSLL(void) : m_head(nullptr)
+{
+}
+
+AddressBookSLL::~AddressBookSLL(void)
+{
++    while (m_head->m_next != nullptr)
++    {
++        PersonNode* previous = m_head;
++        PersonNode* current = m_head;
++        while (current->m_next != nullptr)
++        {
++            previous = current;
++            current = current->m_next;
++        }
++        delete current;
++        previous->m_next = nullptr;
++    }
++    delete m_head;
++    m_head = nullptr;
+}
+
++void AddressBookSLL::AddPerson(const string& name, int age) 
++{
++    PersonNode* newPerson = new PersonNode(name, age);
++    if (m_head == nullptr) { m_head = newPerson; }
++    else 
++    {
++        PersonNode* current = m_head;
++        while (current->getNext() != nullptr) { current = const_cast<PersonNode*>(current->getNext()); }
++        current->setNext(newPerson);
++    }
++}
+
+```
+#### Description
+The coding task I had to do was implement the functionality of a public member method using the following method prototype:
+```c++
+void AddPerson(const string& name, int age);
+```
+So the header file includes the method description whilst the source file contains the code which iterates through a valid list and adds the new person to the end of the list.
+
+</details>
 </details>
 
 ----

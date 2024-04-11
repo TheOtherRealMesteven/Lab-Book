@@ -7,6 +7,7 @@
 |**1**| 🤔 Friend classes (Allow classes to access private fields)
 | | 🤔 Getters and setters
 |**2**| 🤔 
+|**3**| 🤔 
 
 ## Lab Task Submission
 *The tasks assigned to be reviewed for the weeks lab has been completed below.*
@@ -111,6 +112,24 @@ Furthermore, the ``friend class`` allows that class to reference the private mem
 
 <details> <!-- Question 2 -->
   <summary> Q2. </summary>
+
+## Question:
+
+## Solution:
+```c++
+```
+## Test data:
+n/a
+## Sample output:
+n/a
+## Reflection:
+
+</details>
+
+----
+
+<details> <!-- Question 3 -->
+  <summary> Q3. </summary>
 
 ## Question:
 

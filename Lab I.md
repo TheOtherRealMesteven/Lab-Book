@@ -78,3 +78,64 @@ The two severity three ratings are in the `Main.cpp` file and as such were not r
 
 ## Lab Review
 *A breakdown or review of the lab has been listed below.*
+
+<details>
+  <summary>Implementation Details</summary>
+
+  <details>
+    <summary>Process Command</summary>
+
+For the implementation of the commands, I used a switch statement in combination to an unordered map. If this were programmed in c# the unordered map would not be necessary but with c++ switch statements cannot operate with strings as the switch condition and thus I had to convert the strings inputs into a numerical value to switch with and the most efficient solution was to use an unordered map.
+```c++
+enum class Command {
+	MaxDist,
+	MaxLink,
+	FindDist,
+	FindNeighbour,
+	Check,
+	FindRoute,
+	FindShortestRoute
+};
+
+std::unordered_map<std::string, Command> commandMap = {
+		{"MaxDist", Command::MaxDist},
+		{"MaxLink", Command::MaxLink},
+		{"FindDist", Command::FindDist},
+		{"FindNeighbour", Command::FindNeighbour},
+		{"Check", Command::Check},
+		{"FindRoute", Command::FindRoute},
+		{"FindShortestRoute", Command::FindShortestRoute}
+};
+
+bool Navigation::ProcessCommand(const std::string& commandString) {
+	std::istringstream inString(commandString);
+	std::string command;
+	inString >> command;
+
+	Network& network = Network::getInstance();
+	const auto it = commandMap.find(command);
+	if (it == commandMap.end()) return false;
+	switch (it->second)
+	{
+	case Command::MaxDist:
+	{
+		network.getMaxDist(_outFile);
+		return true;
+	}
+	case Command::MaxLink:
+	...
+}
+```
+
+As for the commands parameters, I primarily just used right-shift operators to assign them directly.
+```c++
+case Command::FindShortestRoute:
+{
+	std::string mode;
+	int input3, input4;
+	inString >> mode >> input3 >> input4;
+...
+```
+
+  </details>
+</details>

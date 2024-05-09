@@ -289,6 +289,8 @@ std::ostringstream findDist(int startRef, int endRef) const {
 }
 ```
 
+Time was likely lost here due to the square root method call, as the methods being called have a lot of processing to handle all values used and ensure functionality. It was reduced previously by using normal multiplication (`latDiff * latDiff`) instead of the math power command.
+
 </details>
 <details>
 	<summary>FindNeighbour</summary>
@@ -314,6 +316,116 @@ std::ostringstream Network::listNeighbors(const Node* node) {
 </details>
 <details>
 	<summary>Check</summary>
+
+There were a few method calls to makesure check functioned as intended, which likely added to the processing time of the command.
+
+### Parameters
+Passing in the parameters likely caused some delays.
+
+```c++
+std::string check;
+inString >> check;
+
+_outFile << "Check " << check << " ";
+
+std::vector<int> railNumbers;
+int num;
+while (inString >> num) {
+	_outFile << num << " ";
+	railNumbers.push_back(num);
+}
+const auto it = modeMap.find(check);
+```
+
+To ensure the code works properly when it is marked, I used a while loop to input the railnumbers, as I was unsure whether four parameters would be passed in or if a different number would be used.
+In addition, to retrieve the proper mode of transportation (Which I was using enums to store), I had to use an unordered map to convert the string parameter to an enum one. And as I said previously, the unordered map resulted in inconsistent timings for the process command, and so the combination would likely vary the timings of this command a lot.
+
+```c++
+static const std::unordered_map<std::string, Mode> modeMap = {
+	{"Rail", Mode::Rail},
+	{"Ship", Mode::Ship},
+	{"Bus", Mode::Bus},
+	{"Car", Mode::Car},
+	{"Bike", Mode::Bike},
+	{"Foot", Mode::Foot}
+};
+```
+
+### Main Check
+
+```c++
+bool Network::networkCheckRoute(Mode mode, int startRef, int endRef) {
+	for (const auto& arc : arcs) {
+		if (networkCheckModeType(mode, arc->getModeType()) && ((arc->getStartNode()->getReferenceNumber() == startRef && arc->getEndNode()->getReferenceNumber() == endRef)
+			|| (arc->getStartNode()->getReferenceNumber() == endRef && arc->getEndNode()->getReferenceNumber() == startRef))) {
+			return true;
+		}
+	}
+	return false;
+}
+```
+The above method was used for the main check, it iterated through all the arcs and ran the `RouteCheck` method on each one to ensure that the path was valid for the transport method the user was taking and then there was the start and end node reference checks which allowed the arcs to pass the check if they were reversible.
+
+### Route Check
+
+```c++
+const static std::unordered_map<Mode, std::vector<Mode>> allowedArcs
+{
+	{Mode::Rail, {Mode::Rail}},
+	{Mode::Ship, {Mode::Ship}},
+	{Mode::Bus, {Mode::Rail, Mode::Ship, Mode::Bus}},
+	{Mode::Car, {Mode::Rail, Mode::Ship, Mode::Car}},
+	{Mode::Bike, {Mode::Bike, Mode::Rail, Mode::Ship}},
+	{Mode::Foot, {Mode::Rail, Mode::Ship, Mode::Bus, Mode::Car, Mode::Bike}}
+};
+
+bool Network::networkCheckModeType(Mode mode, Mode modeToCheckAgainst) const
+{
+	auto const it = allowedArcs.find(mode);
+	if (it != allowedArcs.end()) {
+		const std::vector<Mode>& allowedModes = it->second;
+		return std::find(allowedModes.begin(), allowedModes.end(), modeToCheckAgainst) != allowedModes.end();
+	}
+	std::cout << "CheckModeType failed\n";
+	return false;
+}
+```
+The above method is used to check the users route against the arcs route, to ensure the path was valid for their route choice.
+
+The `allowedArcs` unordered map contained a list of user route choices and the permitted arc routes they can take, according to the supplied conditions.
+
+"""
+
+    a rail or ship journey may only use Arcs of the corresponding mode
+    a bus journey may use bus, rail and ship Arcs
+    a car journey may use car, bus and ship Arcs
+    a bike journey may use bike Arcs and Arcs defined in 1 and 2
+    a foot journey may use any Arc
+
+"""
+
+### Outputting
+
+The checks listed above were ran on each pair of nodes, ensuring there was a valid connection between them, returning if the connection passed or failed until it met the end or a fail condtion.
+```c++
+const std::ostringstream Network::processCheckCommand(Mode mode, const std::vector<int>& places) {
+	std::ostringstream returnValue;
+	for (size_t i = 0; i < places.size() - 1; ++i) {
+		const int startRef = places[i];
+		const int endRef = places[i + 1];
+
+		if (!networkCheckRoute(mode, startRef, endRef)) {
+			returnValue << startRef << "," << endRef << ",FAIL" << "\n";
+			return returnValue;
+		}
+		returnValue << startRef << "," << endRef << ",PASS" << "\n";
+	}
+	return returnValue;
+}
+```
+
+Once it had complete, it would return an output string stream containing the information that should be stored in the output file.
+
 </details>
 <details>
 	<summary>FindRoute</summary>

@@ -248,4 +248,74 @@ for (const auto& nodePair2 : Map) {
 ```
 This cut the processing time in half, resulting in around 1200 microseconds to complete the buildnetwork process.
 </details>
+<details>
+	<summary>MaxDist and MaxLink</summary>
+
+ MaxDist and MaxLink were both calculated in `BuildNetwork` then stored as an output string to be assigned to the output file.
+ This meant that their times were drastically minimized when timed as it had been precalculated and cached.
+```c++
+case Command::MaxDist:
+{
+	network.getMaxDist(_outFile);
+	return true;
+}
+
+const void getMaxLink(std::ostream& outputStream) const {
+	outputStream << m_MaxLink.str();
+}
+
+const void getMaxDist(std::ostream& outputStream) const {
+	outputStream << m_MaxDist.str();
+}
+```
+
+</details>
+<details>
+	<summary>FindDist</summary>
+
+FindDist was a simple process, using right shifting the parameters could be retrieved from the input string and then passed to a method which found the nodes, got their co-ordinates and returned the distance between them. Running the utility method to convert the co-ordinates when creating the nodes assisted here as there were no method calls aside from using getters to retrieve values, which are rather efficient themselves.
+```c++
+std::ostringstream findDist(int startRef, int endRef) const {
+	Node* const startNode = findNode(startRef);
+	Node* const endNode = findNode(endRef);
+
+	const double latDiff = startNode->getLatitude() - endNode->getLatitude();
+	const double longDiff = startNode->getLongitude() - endNode->getLongitude();
+	const double distance = sqrt(latDiff * latDiff + longDiff * longDiff);
+
+	std::ostringstream returnValue;
+	returnValue << "FindDist " << startRef << " " << endRef << "\n" << startNode->getName() << "," << endNode->getName() << "," << std::fixed << std::setprecision(3) << distance / 1000 << "\n\n";
+	return returnValue;
+}
+```
+
+</details>
+<details>
+	<summary>FindNeighbour</summary>
+
+FindNeighbour was also a simple process, once again right shifting allowed us to retrieve the node identifier and thus the node from the input.
+From that, we could iterate through the arcs and return the ones which had either started or ended at the given node (Because the arcs are reversible).
+
+```c++
+std::ostringstream Network::listNeighbors(const Node* node) {
+	std::ostringstream returnValue;
+	for (const auto& arc : arcs) {
+		if (arc->getStartNode() == node) {
+			returnValue << arc->getEndNode()->getReferenceNumber() << "\n";
+		}
+		else if (arc->getEndNode() == node) {
+			returnValue << arc->getStartNode()->getReferenceNumber() << "\n";
+		}
+	}
+	return returnValue;
+}
+```
+
+</details>
+<details>
+	<summary>Check</summary>
+</details>
+<details>
+	<summary>FindRoute</summary>
+</details>
 </details>

@@ -79,9 +79,6 @@ The two severity three ratings are in the `Main.cpp` file and as such were not r
 ## Lab Review
 *A breakdown or review of the lab has been listed below.*
 
-<details>
-  <summary>Implementation Details</summary>
-
 For this project, I primarily handled my code with a new class `Network`. This class would handle all the processes relating to the network of node and arcs which is the entirety of the project. Its was mainly used this way as the class managed the unordered_map containing all the nodes and the vector list of the arcs, which made referencing far easier than if I had seperated the methods.
 
 There were additional files for Node and Arcs classes so they could be setup as objects to be used later on, but these primarily held information related to creating the class and retrieving the encapsulated information they held.
@@ -429,5 +426,60 @@ Once it had complete, it would return an output string stream containing the inf
 </details>
 <details>
 	<summary>FindRoute</summary>
-</details>
+
+FindRoute uses a method to quickly find a route between two nodes in the network using the Breadth-First search method, using queues to keep track of nodes to visit and sets to store what nodes have already been visited.
+
+```c++
+std::vector<int> Network::networkFindRoute(Mode mode, int startRef, int destRef) {
+	std::queue<Node*> q;
+	std::unordered_set<Node*> visited;
+
+	Node* const startNode = findNode(startRef);
+	Node* const destNode = findNode(destRef);
+
+	q.push(startNode);
+	visited.insert(startNode);
+	std::unordered_map<Node*, Node*> parent;
+
+	// Perform BFS
+	while (!q.empty()) {
+		Node* current = q.front();
+		q.pop();
+
+		if (current == destNode) {
+			std::vector<int> route;
+			while (current != nullptr) {
+				route.push_back(current->getReferenceNumber());
+				current = parent[current];
+			}
+			std::reverse(route.begin(), route.end());
+			return route;
+		}
+
+		for (Arc* const arc : arcs) {
+			if (arc->getStartNode() == current && networkCheckModeType(mode, arc->getModeType())) {
+				Node* const neighbor = arc->getEndNode();
+				if (visited.find(neighbor) == visited.end()) {
+					q.push(neighbor);
+					visited.insert(neighbor);
+					parent[neighbor] = current;
+				}
+			}
+			else if (arc->getEndNode() == current && networkCheckModeType(mode, arc->getModeType())) {
+				Node* const neighbor = arc->getStartNode();
+				if (visited.find(neighbor) == visited.end()) {
+					q.push(neighbor);
+					visited.insert(neighbor);
+					parent[neighbor] = current;
+				}
+			}
+		}
+	}
+	return {};
+}
+```
+
+Breadth first search finds the shortest route between the two given nodes first and so it is used for both `FindRoute` and `FindShortestRoute`.
+
+
 </details>

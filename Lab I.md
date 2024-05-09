@@ -82,6 +82,10 @@ The two severity three ratings are in the `Main.cpp` file and as such were not r
 <details>
   <summary>Implementation Details</summary>
 
+For this project, I primarily handled my code with a new class `Network`. This class would handle all the processes relating to the network of node and arcs which is the entirety of the project. Its was mainly used this way as the class managed the unordered_map containing all the nodes and the vector list of the arcs, which made referencing far easier than if I had seperated the methods.
+
+There were additional files for Node and Arcs classes so they could be setup as objects to be used later on, but these primarily held information related to creating the class and retrieving the encapsulated information they held.
+
   <details>
     <summary>Process Command</summary>
 
@@ -138,4 +142,110 @@ case Command::FindShortestRoute:
 ```
 
   </details>
+<details>
+	<summary>Build Network</summary>
+
+For build network, I have two while loops which iterate through each line in each file. Initially, they were both reading the files using stringstream methods.
+```c++
+		std::string name;
+		int referenceId;
+		double latitude, longitude;
+
+		std::getline(iss, name, ',');
+		iss >> referenceId;
+		iss.ignore();
+		iss >> latitude;
+		iss.ignore();
+		iss >> longitude;
+```
+However, this was replaced later on which reduced 1000 microseconds off of the build network time, making it drastically faster. (I know that build network will not be marked, but small numbers are good for time values)
+```c++
+		size_t pos1 = line.find(',');
+		size_t pos2 = line.find(',', pos1 + 1);
+		size_t pos3 = line.find(',', pos2 + 1);
+		std::string name = line.substr(0, pos1);
+		int referenceId = std::stoi(line.substr(pos1 + 1, pos2 - pos1 - 1));
+		double latitude = std::stod(line.substr(pos2 + 1, pos3 - pos2 - 1));
+		double longitude = std::stod(line.substr(pos3 + 1));
+```
+The code above shows the current method, rather than using the ignore method and right shifting, we use string manipulation to find the parameters and pass them to their numerical forms.
+
+
+In addition to this, as `MaxDist` and `MaxLink` require no inputs, they can be calculated in the build network method as it would be a minimal addition to the calculation speed.
+### Max Link
+Max link was far easier than MaxDist, you will findout why in a moment, as it only required an additional if statement on the end of the original iteration code.
+```c++
+if (!CachedLongestArc || newArc->getDistance() > CachedLongestArc->getDistance()) {
+	CachedLongestArc = newArc;
+}
+```
+And then it could be stored as an outputstream to ensure minimal processing is done when it came to the timed execution of the method.
+```c++
+void processMaxLink(const Arc* CachedLongestArc) {
+	m_MaxLink << "MaxLink" << "\n" << CachedLongestArc->getStartNode()->getReferenceNumber() << "," << CachedLongestArc->getEndNode()->getReferenceNumber() << "," << std::fixed << std::setprecision(3) << CachedLongestArc->getDistance() / 1000 << "\n\n";
+}
+```
+
+### Max Dist
+Max distance was originally extremely inefficient. At the start, it was executed after build network was complete and due to its nested for loops, it forced the build network time into quadruple digits.
+```c++
+        for (const auto& nodePair : nodes) {
+            for (const auto& nodePair2 : nodes) {
+                if (nodePair.first != nodePair2.first) {
+                    double x1, y1, x2, y2;
+                    Utility::LLtoUTM(nodePair.second->getLatitude(), nodePair.second->getLongitude(), x1, y1);
+                    Utility::LLtoUTM(nodePair2.second->getLatitude(), nodePair2.second->getLongitude(), x2, y2);
+                    double distance = pow(x2 - x1, 2) + pow(y2 - y1, 2);
+                    if (distance > maxDistance) {
+                        maxDistance = distance;
+                        furthestStartNode = nodePair.second;
+                        furthestEndNode = nodePair2.second;
+                    }
+                }
+```
+The second iteration was able to reduce the processing time down to triple digits, around the 3000 micro second mark by removing the initial for loop and instead merging it with the while loop which was already inplace.
+```c++
+		iss >> latitude;
+		iss.ignore();
+		iss >> longitude;
+		Node* newNode = new Node(referenceId, name, latitude, longitude);
+		Network::network.addNode(newNode);
+
+		// Calculate Max Dist
+		std::unordered_map<int, Node*>& Map = Network::network.getNodeMap();
+		for (const auto& nodePair2 : Map) {
+			if (referenceId != nodePair2.first) {
+				double x1, y1, x2, y2;
+				Utility::LLtoUTM(latitude, longitude, x1, y1);
+				Utility::LLtoUTM(nodePair2.second->getLatitude(), nodePair2.second->getLongitude(), x2, y2);
+				double distance = pow(x2 - x1, 2) + pow(y2 - y1, 2);
+				if (distance > maxDistance) {
+					maxDistance = distance;
+					bestEnd = name;
+					bestStart = nodePair2.second->getName();
+				}
+			...
+```
+The issue with the second iteration was the two method calls ran with each node in a nested for loop. Having a large amount of nodes made this increment the time value by a large amount.
+To fix this issue, the third iteration reworked the node class to store the latitude and longitude values **after** they had been processed by the method as where it was called in the program, the method was also called to convert the values. So it was logical to simplify the process.
+```c++
+Node* const newNode = new Node(referenceId, name, x, y);
+network.addNode(newNode);
+
+// Calculate Max Dist
+const std::unordered_map<int, Node*>& Map = network.getNodeMap();
+for (const auto& nodePair2 : Map) {
+	if (referenceId != nodePair2.first) {
+		const double latDiff = x - nodePair2.second->getLatitude();
+		const double longDiff = y - nodePair2.second->getLongitude();
+		const double distanceSquared = latDiff * latDiff + longDiff * longDiff;
+		if (distanceSquared > maxDistance) {
+			maxDistance = distanceSquared;
+			bestEnd = name;
+			bestStart = nodePair2.second->getName();
+		}
+	...
+```
+This cut the processing time in half, resulting in around 1200 microseconds to complete the buildnetwork process.
+</details>
 </details>

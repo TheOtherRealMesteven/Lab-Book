@@ -4,6 +4,8 @@
 *For review, the results of the lab has been submitted below.*
 
 ### Times created by VM
+The results of the final solution were timed and averaged over four runs (in microseconds), as shown in the table below:
+
 | Command | Times 1 | Times 2 | Times 3 | Times 4 | Average |
 |---------|---------|---------|---------|---------|---------|
 |BuildNetwork|949|963|964|977|**963**|
@@ -483,3 +485,17 @@ Breadth first search finds the shortest route between the two given nodes first 
 
 
 </details>
+
+## Lab Critique
+
+From the information shared in the public discord space, I know my command execution times are not the most efficient.
+![image](https://github.com/TheOtherRealMesteven/Lab-Book/assets/115008465/c6ecfd24-6a4d-4532-95f5-069ee2e78e47)
+
+Most of their values are half of my timings or shave off around 10 microseconds.
+
+This shows that I still have a lot of techniques to learn for c++ to optimize my code to be even faster. That being said, the timings are in microseconds which means a difference of 10 microseconds is extremely minimal in the majority of programming circumstances as computers have more than sufficient resources for this loss.
+
+
+With parasoft, initially I had a large number of corrections to be made to remove the top three severity levels from my code. Assuming parasoft enforces secure, efficient and accurate programming then it is clear to me that I need to get more experience programming in this language specifically and with parasoft grading my end result to guide me to become a better professional programmer as a lot of time was expended and stress gained trying to balance the parasoft corrections and my programs functionality.
+
+Overall, I believe that if I had made the most of my time allowance to work on the project, I would have minimised the timings even further from doing more research about the most efficient techniques. And I believe that I would have ensured stability and maintainability in my programs code. As it stands currently, I am concerned about the timing differences caused by the unordered maps and the `rushed` formatting style my source code implies.
